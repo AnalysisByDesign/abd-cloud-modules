@@ -2,7 +2,7 @@
 # CloudWatch Log Groups
 # -----------------------------------------------------------------------------
 
-resource "aws_cloudwatch_log_group" "log_group" {
+resource "aws_cloudwatch_log_group" "log_groups" {
   count = "${length(var.cloudwatch_loggroup_names)}"
   name  = "${element(var.cloudwatch_loggroup_names, count.index)}"
 
