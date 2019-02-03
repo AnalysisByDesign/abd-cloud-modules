@@ -1,25 +1,25 @@
 # Required -----------------------------------------------------------------------------------
 
 variable "repository_name" {
-  description = "Name of ECR repositry"
+  description = "Name of docker repository"
   type        = "string"
 }
 
 # Optional -----------------------------------------------------------------------------------
 
+variable "repository_enabled" {
+  description = "Do we need to build repository"
+  default     = false
+}
+
 variable "repository_policy_document" {
-  description = "Policies for ECR registry"
+  description = "Policies for ECR repository"
   type        = "string"
   default     = ""
 }
 
-variable "ecr_lifecycle_document" {
+variable "repository_lifecycle_document" {
   description = "Lifecycle policies for ECR"
   type        = "string"
   default     = ""
-}
-
-variable "ecr_repository_enabled" {
-  description = "Do we need to build repository"
-  default     = false
 }
