@@ -1,3 +1,7 @@
+# -----------------------------------------------------------------------------
+# Docker Registry Creation
+# -----------------------------------------------------------------------------
+
 resource "aws_ecr_repository" "this" {
   count = "${var.ecr_repository_enabled ? 1 : 0}"
   name  = "${var.repository_name}"
