@@ -7,7 +7,7 @@ variable "repository_name" {
 
 # Optional -----------------------------------------------------------------------------------
 
-variable "repository_enabled" {
+variable "required" {
   description = "Do we need to build repository"
   default     = false
 }
