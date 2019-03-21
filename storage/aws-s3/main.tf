@@ -43,7 +43,7 @@ resource "aws_s3_bucket" "bucket" {
 # If we have policy defined as text we apply this resource
 resource "aws_s3_bucket_policy" "bucket_policy" {
   count  = "${var.count > 0 && var.bucket_policy != "" ? 1 : 0}"
-  bucket = "${aws_s3_bucket.this.id}"
+  bucket = "${aws_s3_bucket.bucket.id}"
   policy = "${var.bucket_policy}"
 }
 
