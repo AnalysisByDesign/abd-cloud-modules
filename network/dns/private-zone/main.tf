@@ -10,7 +10,7 @@ resource "aws_route53_zone" "this" {
   name = "${element(local.search_domains, count.index)}"
 
   vpc {
-    vpc_id = "${local.vpc_id}"
+    vpc_id = "${var.vpc_id}"
   }
 
   lifecycle {

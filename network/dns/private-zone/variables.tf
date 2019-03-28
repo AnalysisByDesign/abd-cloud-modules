@@ -3,16 +3,9 @@
 # You must provide a value for each of these parameters.
 # --------------------------------------------------------------------------------------------
 
-variable "search_domain" {
-  description = "The domain name of the Route53 Zone"
+variable "vpc_id" {
+  description = "The VPC id to attach the private zone to"
   type        = "string"
-  default     = ""
-}
-
-variable "search_domains" {
-  description = "A list of search domains to create a public zones for"
-  type        = "list"
-  default     = []
 }
 
 variable "common_tags" {
@@ -24,6 +17,18 @@ variable "common_tags" {
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
 # --------------------------------------------------------------------------------------------
+
+variable "search_domain" {
+  description = "The domain name of the Route53 Zone"
+  type        = "string"
+  default     = ""
+}
+
+variable "search_domains" {
+  description = "A list of search domains to create a public zones for"
+  type        = "list"
+  default     = []
+}
 
 variable "use_existing_zones" {
   description = "Re-use existing public and private zones"
