@@ -27,6 +27,11 @@ variable "cidr_blocks" {
 
 # Optional -----------------------------------------------------------------------------------
 
+variable "required" {
+  description = "Do we want to build this security group rule"
+  default     = true
+}
+
 variable "single_port" {
   description = "The security group single port"
   type        = "string"

@@ -3,6 +3,8 @@
 # --------------------------------------------------------------------------------------------
 
 resource "aws_security_group_rule" "this" {
+  count = "${var.required ? 1 : 0}"
+
   security_group_id = "${var.security_group_id}"
   type              = "${var.type}"
   protocol          = "${var.protocol}"
