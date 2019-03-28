@@ -1,1 +1,0 @@
-../../../../tf-common/data-source-vpc.tf
