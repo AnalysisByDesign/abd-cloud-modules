@@ -26,7 +26,7 @@ variable "description" {
 variable "type" {
   description = "What is the type of value to be stored"
   type        = "string"
-  default     = "string"
+  default     = "String"
 }
 
 variable "value" {
