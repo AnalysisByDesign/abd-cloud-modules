@@ -35,10 +35,9 @@ resource "aws_acm_certificate_validation" "this" {
 resource "aws_route53_record" "cert_validation" {
   count = "${var.required ? 1 : 0}"
 
-  provider = "aws.acm_custom"
-  name     = "${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_name}"
-  type     = "${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_type}"
-  zone_id  = "${var.r53_zone_id}"
-  records  = ["${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_value}"]
-  ttl      = 60
+  name    = "${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_name}"
+  type    = "${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_type}"
+  zone_id = "${var.r53_zone_id}"
+  records = ["${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_value}"]
+  ttl     = 60
 }
