@@ -1,0 +1,110 @@
+# --------------------------------------------------------------------------------------------
+# REQUIRED PARAMETERS
+# You must provide a value for each of these parameters.
+# --------------------------------------------------------------------------------------------
+
+variable "name" {
+  description = "The name of the ALB."
+  type        = "string"
+}
+
+variable "vpc_id" {
+  description = "The identifier of the VPC in which to create the target group"
+  type        = "string"
+}
+
+variable "subnet_ids" {
+  description = "A list of subnet IDs to attach to the LB."
+  type        = "list"
+}
+
+variable "security_group_ids" {
+  description = "A list of security group IDs to assign to the LB."
+  type        = "list"
+}
+
+variable "acm_arn" {
+  description = "SSL cert ARN to add to listener."
+  type        = "string"
+}
+
+variable "common_tags" {
+  description = "A map of tags to add to all resources"
+  type        = "map"
+}
+
+# --------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# --------------------------------------------------------------------------------------------
+
+variable "alb_tags" {
+  description = "Additional tags for the LB"
+  type        = "map"
+  default     = {}
+}
+
+# --------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# --------------------------------------------------------------------------------------------
+
+variable "internal" {
+  description = "Is this ALB internal"
+  default     = false
+}
+
+variable "interval" {
+  description = "The approximate amount of time, in seconds, between health checks of an individual target."
+  type        = "string"
+  default     = "10"
+}
+
+variable "path" {
+  description = "The destination for the health check request."
+  type        = "string"
+  default     = "/"
+}
+
+variable "timeout" {
+  description = "The amount of time, in seconds, during which no response means a failed health check."
+  type        = "string"
+  default     = "5"
+}
+
+variable "unhealthy_threshold" {
+  description = "The number of consecutive health check failures required before considering the target unhealthy."
+  type        = "string"
+  default     = "2"
+}
+
+variable "healthy_threshold" {
+  description = "The number of consecutive health checks successes required before considering an unhealthy target healthy."
+  type        = "string"
+  default     = "2"
+}
+
+variable "success_code" {
+  description = "The HTTP codes to use when checking for a successful response from a target."
+  type        = "string"
+  default     = "200,302"
+}
+
+variable "stickiness_enabled" {
+  description = "Enable sticky sessions between the load balancer and application instances"
+  default     = false
+}
+
+# ============================================================================================
+#                                      WAF
+# ============================================================================================
+variable "waf_enabled" {
+  description = "Is WAF enabled"
+  default     = false
+}
+
+variable "waf_web_acl" {
+  description = "AWS WAF WEB ACL id"
+  type        = "string"
+  default     = ""
+}
