@@ -2,7 +2,7 @@
 # EC2 instance
 # -----------------------------------------------------------------------------
 
-resource "aws_instance" "this" {
+resource "aws_instance" "ec2" {
   ami = "${var.image_id}"
 
   instance_type = "${var.instance_type}"
