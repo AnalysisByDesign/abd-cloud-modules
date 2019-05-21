@@ -15,8 +15,4 @@ resource "aws_ecs_task_definition" "this" {
   memory                   = "${var.memory}"
   execution_role_arn       = "${var.role_arn}"
   task_role_arn            = "${var.role_arn}"
-
-  volume {
-    name = "${var.source_volume}"
-  }
 }
