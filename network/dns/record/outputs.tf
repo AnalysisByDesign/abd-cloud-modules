@@ -12,6 +12,7 @@ output "hosted_zone_id" {
   value = "${join("", aws_route53_record.this.*.zone_id)}"
 }
 
-output "name" {
-  value = "${join("", aws_route53_record.this.*.name)}"
-}
+#output "name" {
+#  value = "${join("", aws_route53_record.this.*.name)}"
+#}
+
