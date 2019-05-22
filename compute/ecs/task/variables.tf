@@ -1,10 +1,7 @@
-################################################################
-#
-# CORE:
-# TASK: VARIABLES.TF TASK .
-# Provides an ECS task definition to be used in aws_ecs_service.
-#
-################################################################
+# --------------------------------------------------------------------------------------------
+# ECS Task Variables
+# --------------------------------------------------------------------------------------------
+
 variable "family" {
   description = "A unique name for your task definition."
   type        = "string"
