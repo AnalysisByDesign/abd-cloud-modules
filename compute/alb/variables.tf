@@ -44,11 +44,6 @@ variable "alb_tags" {
   default     = {}
 }
 
-# --------------------------------------------------------------------------------------------
-# OPTIONAL PARAMETERS
-# These parameters have reasonable defaults.
-# --------------------------------------------------------------------------------------------
-
 variable "internal" {
   description = "Is this ALB internal"
   default     = false
@@ -93,6 +88,12 @@ variable "success_code" {
 variable "stickiness_enabled" {
   description = "Enable sticky sessions between the load balancer and application instances"
   default     = false
+}
+
+variable "target_type" {
+  description = "The target type for the group - instance or ip"
+  type        = "string"
+  default     = "instance"
 }
 
 # ============================================================================================
