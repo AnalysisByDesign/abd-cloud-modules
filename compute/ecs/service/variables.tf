@@ -17,11 +17,6 @@ variable "task_definition" {
   type        = "string"
 }
 
-variable "iam_role_arn" {
-  description = "ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf"
-  type        = "string"
-}
-
 variable "subnet_ids" {
   description = "The subnets associated with the task or service"
   type        = "list"
