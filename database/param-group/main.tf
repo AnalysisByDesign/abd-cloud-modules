@@ -35,8 +35,9 @@ resource "aws_db_parameter_group" "this" {
   }
 
   parameter {
-    name  = "query_cache_type"
-    value = "${var.query_cache_type}"
+    name         = "query_cache_type"
+    value        = "${var.query_cache_type}"
+    apply_method = "pending-reboot"
   }
 
   parameter {
