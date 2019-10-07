@@ -24,20 +24,24 @@ resource "aws_acm_certificate" "this" {
   }
 }
 
+locals {
+  acm_cert = ["${aws_acm_certificate.this.0.domain_validation_options}"]
+}
+
+resource "aws_route53_record" "cert_validation" {
+  count = "${var.required ? length(local.acm_cert) : 0}"
+
+  name    = "${lookup(local.acm_cert[count.index], "resource_record_name")}"
+  type    = "${lookup(local.acm_cert[count.index], "resource_record_type")}"
+  zone_id = "${var.r53_zone_id}"
+  records = ["${lookup(local.acm_cert[count.index], "resource_record_value")}"]
+  ttl     = 60
+}
+
 resource "aws_acm_certificate_validation" "this" {
   count = "${var.required ? 1 : 0}"
 
   provider                = "aws.acm_custom"
   certificate_arn         = "${aws_acm_certificate.this.0.arn}"
-  validation_record_fqdns = ["${aws_route53_record.cert_validation.0.fqdn}"]
-}
-
-resource "aws_route53_record" "cert_validation" {
-  count = "${var.required ? 1 : 0}"
-
-  name    = "${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_name}"
-  type    = "${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_type}"
-  zone_id = "${var.r53_zone_id}"
-  records = ["${aws_acm_certificate.this.0.domain_validation_options.0.resource_record_value}"]
-  ttl     = 60
+  validation_record_fqdns = ["${aws_route53_record.cert_validation.*.fqdn}"]
 }
