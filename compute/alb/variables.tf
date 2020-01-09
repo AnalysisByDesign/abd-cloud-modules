@@ -64,13 +64,13 @@ variable "path" {
 variable "timeout" {
   description = "The amount of time, in seconds, during which no response means a failed health check."
   type        = "string"
-  default     = "5"
+  default     = "10"
 }
 
 variable "unhealthy_threshold" {
   description = "The number of consecutive health check failures required before considering the target unhealthy."
   type        = "string"
-  default     = "2"
+  default     = "10"
 }
 
 variable "healthy_threshold" {
@@ -82,7 +82,7 @@ variable "healthy_threshold" {
 variable "success_code" {
   description = "The HTTP codes to use when checking for a successful response from a target."
   type        = "string"
-  default     = "200,302"
+  default     = "200,301,302"
 }
 
 variable "stickiness_enabled" {
