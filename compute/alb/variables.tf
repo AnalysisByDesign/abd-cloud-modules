@@ -52,7 +52,7 @@ variable "internal" {
 variable "interval" {
   description = "The approximate amount of time, in seconds, between health checks of an individual target."
   type        = "string"
-  default     = "10"
+  default     = "60"
 }
 
 variable "path" {
