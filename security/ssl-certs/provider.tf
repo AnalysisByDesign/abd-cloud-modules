@@ -11,7 +11,6 @@
 
 provider "aws" {
   alias   = "acm_custom"
-  version = "~> 1.48"
 
   region = var.certificate_region
 
