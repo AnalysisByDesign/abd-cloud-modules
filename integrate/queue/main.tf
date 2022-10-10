@@ -3,7 +3,7 @@
 # --------------------------------------------------------------------------------------------
 
 resource "aws_sqs_queue" "without_redrive" {
-  count = var.count > 0 ? (var.deadletter_enable ? 0 : 1) : 0
+  count = var.num_queues > 0 ? (var.deadletter_enable ? 0 : 1) : 0
 
   name       = var.name
   fifo_queue = var.fifo
@@ -18,7 +18,7 @@ resource "aws_sqs_queue" "without_redrive" {
 }
 
 resource "aws_sqs_queue" "with_redrive" {
-  count = var.count > 0 ? (var.deadletter_enable ? 1 : 0) : 0
+  count = var.num_queues > 0 ? (var.deadletter_enable ? 1 : 0) : 0
 
   name       = var.name
   fifo_queue = var.fifo

@@ -15,7 +15,7 @@ variable "common_tags" {
 
 # Optional -----------------------------------------------------------------------------------
 
-variable "count" {
+variable "num_queues" {
   description = "How many queues to build"
   default     = 0
 }
