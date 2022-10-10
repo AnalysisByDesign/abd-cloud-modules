@@ -13,11 +13,11 @@ provider "aws" {
   alias   = "acm_custom"
   version = "~> 1.48"
 
-  region = "${var.certificate_region}"
+  region = var.certificate_region
 
   assume_role {
-    role_arn = "arn:aws:iam::${var.acct_target}:role/${var.acct_target_role == "" 
-                  ? "terraform" 
-                  : var.acct_target_role}"
+    role_arn = "arn:aws:iam::${var.acct_target}:role/${var.acct_target_role == ""
+      ? "terraform"
+    : var.acct_target_role}"
   }
 }

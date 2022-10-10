@@ -9,7 +9,7 @@ variable "name" {
 
 variable "common_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map(string)
 }
 
 # --------------------------------------------------------------------------------------------
@@ -19,37 +19,37 @@ variable "common_tags" {
 
 variable "count" {
   description = "Do we need to create the bucket"
-  type        = "string"
+  type        = string
   default     = "1"
 }
 
 variable "region" {
   description = "A different region to build the bucket in"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "acl" {
   description = "The canned ACL to apply"
-  type        = "string"
+  type        = string
   default     = "private"
 }
 
 variable "bucket_policy" {
   description = "S3 bucket policy"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "logging" {
   description = "Logging definition for the bucket"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "lifecycle_rule" {
   description = "Lifecycle rules for the bucket"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -65,7 +65,7 @@ variable "acceleration_status" {
 
 variable "replication_configuration" {
   description = "Replication configuration details"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -81,6 +81,6 @@ variable "enable_mfa_delete" {
 
 variable "s3_tags" {
   description = "Additional tags for the S3 bucket"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }

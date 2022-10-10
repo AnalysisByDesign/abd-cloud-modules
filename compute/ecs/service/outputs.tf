@@ -7,5 +7,5 @@
 ################################################################
 
 output "aws_ecs_service_id" {
-  value = "${aws_ecs_service.this.id}"
+  value = aws_ecs_service.this.id
 }

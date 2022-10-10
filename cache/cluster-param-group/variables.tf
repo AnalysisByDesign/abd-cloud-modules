@@ -6,7 +6,7 @@
 # Required -----------------------------------------------------------------------------------
 variable "name" {
   description = "Name of Elasticache cluster parameter groups"
-  type        = "string"
+  type        = string
 }
 
 # Optional -----------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ variable "count" {
 
 variable "description" {
   description = "The IAM policy description"
-  type        = "string"
+  type        = string
   default     = "Terraform managed"
 }
 

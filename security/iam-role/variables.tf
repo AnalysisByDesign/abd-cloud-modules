@@ -5,7 +5,7 @@
 
 variable "roles" {
   description = "A list of role details"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -31,6 +31,6 @@ variable "required" {
 
 variable "path" {
   description = "Path location for role to be created"
-  type        = "string"
+  type        = string
   default     = "/"
 }

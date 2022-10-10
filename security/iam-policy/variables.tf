@@ -7,7 +7,7 @@
 
 variable "name" {
   description = "The IAM policy name"
-  type        = "string"
+  type        = string
 }
 
 # Optional -----------------------------------------------------------------------------------
@@ -19,18 +19,18 @@ variable "count" {
 
 variable "path" {
   description = "Path location for policy to be created"
-  type        = "string"
+  type        = string
   default     = "/"
 }
 
 variable "description" {
   description = "The IAM policy description"
-  type        = "string"
+  type        = string
   default     = "Terraform managed"
 }
 
 variable "policy" {
   description = "The IAM policy to apply"
-  type        = "string"
+  type        = string
   default     = ""
 }

@@ -3,8 +3,8 @@
 # -----------------------------------------------------------------------------
 
 resource "aws_route53_record" "alias" {
-  zone_id = "${var.zone_id}"
-  name    = "${var.name}"
+  zone_id = var.zone_id
+  name    = var.name
   type    = "A"
 
   alias = {

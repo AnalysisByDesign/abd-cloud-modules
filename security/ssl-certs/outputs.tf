@@ -3,11 +3,11 @@
 # --------------------------------------------------------------------------------------------
 
 output "id" {
-  value = "${aws_acm_certificate.this.*.id}"
+  value = aws_acm_certificate.this.*.id
 }
 
 output "arn" {
-  value = "${aws_acm_certificate.this.*.arn}"
+  value = aws_acm_certificate.this.*.arn
 }
 
 output "domain_validation_options" {

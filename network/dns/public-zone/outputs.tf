@@ -5,7 +5,7 @@
 # Route53
 output "zone_id" {
   description = "The ID of the zones"
-  value       = "${join(",", aws_route53_zone.this.*.zone_id)}"
+  value       = join(",", aws_route53_zone.this.*.zone_id)
 }
 
 output "name_servers" {

@@ -5,23 +5,23 @@
 
 variable "zone_id" {
   description = "The name of the Route53 zone to build the record in"
-  type        = "string"
+  type        = string
 }
 
 variable "name" {
   description = "The name of the Route53 record"
-  type        = "string"
+  type        = string
 }
 
 variable "type" {
   description = "The type of the Route53 record"
-  type        = "string"
+  type        = string
   default     = "A"
 }
 
 variable "records" {
   description = "DNS records to add to route53 record"
-  type        = "list"
+  type        = list(string)
 }
 
 # --------------------------------------------------------------------------------------------
@@ -31,12 +31,12 @@ variable "records" {
 
 variable "required" {
   description = "Do we need to create this - can be disabled from within another module"
-  type        = "string"
+  type        = string
   default     = 1
 }
 
 variable "ttl" {
   description = "The TTL for the Route53 record"
-  type        = "string"
+  type        = string
   default     = "60"
 }

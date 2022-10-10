@@ -3,10 +3,10 @@
 # --------------------------------------------------------------------------------------------
 
 resource "aws_security_group" "this" {
-  name        = "${var.name}"
+  name        = var.name
   description = "Terraform - ${var.description}"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = var.vpc_id
 
-  tags = "${merge(var.common_tags, var.sg_tags, 
-              map("Name", var.name))}"
+  tags = (merge(var.common_tags, var.sg_tags,
+  map("Name", var.name)))
 }

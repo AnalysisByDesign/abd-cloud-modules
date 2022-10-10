@@ -7,12 +7,12 @@
 
 variable "name" {
   description = "Name of DB parameter groups"
-  type        = "string"
+  type        = string
 }
 
 variable "common_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map(string)
 }
 
 # Optional -----------------------------------------------------------------------------------
@@ -23,13 +23,13 @@ variable "count" {
 
 variable "description" {
   description = "The RDS parameter groups description"
-  type        = "string"
+  type        = string
   default     = "Terraform managed"
 }
 
 variable "db_family" {
   description = "The Aurora family for the param group"
-  type        = "string"
+  type        = string
   default     = "aurora-mysql5.7"
 }
 
@@ -100,13 +100,13 @@ variable "wait_timeout" {
 
 variable "sql_mode" {
   description = "Current SQL Server Mode."
-  type        = "string"
+  type        = string
   default     = "NO_ENGINE_SUBSTITUTION"
 }
 
 variable "param_group_tags" {
   description = "A map of tags to add to parameter group"
-  type        = "map"
+  type        = map(string)
 
   default = {
     "Component" = "rds aurora"

@@ -2,8 +2,8 @@
 # CORE: main.tf
 
 resource "aws_alb" "this" {
-  name               = "${var.name}"
-  internal           = "${var.internal}"
+  name               = var.name
+  internal           = var.internal
   load_balancer_type = "application"
   security_groups    = ["${var.security_group_ids}"]
   subnets            = ["${var.subnet_ids}"]
@@ -14,11 +14,11 @@ resource "aws_alb" "this" {
   #    enabled = true
   #  }
 
-  tags = "${merge(var.common_tags, var.alb_tags, map("Name", format("%s", var.name)))}"
+  tags = merge(var.common_tags, var.alb_tags, map("Name", format("%s", var.name)))
 }
 
 resource "aws_lb_listener" "redirect" {
-  load_balancer_arn = "${aws_alb.this.arn}"
+  load_balancer_arn = aws_alb.this.arn
   port              = "80"
   protocol          = "HTTP"
 
@@ -34,39 +34,39 @@ resource "aws_lb_listener" "redirect" {
 }
 
 resource "aws_alb_listener" "actual" {
-  load_balancer_arn = "${aws_alb.this.arn}"
+  load_balancer_arn = aws_alb.this.arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2015-05"
-  certificate_arn   = "${var.acm_arn}"
+  certificate_arn   = var.acm_arn
 
   default_action {
     type             = "forward"
-    target_group_arn = "${aws_alb_target_group.this.arn}"
+    target_group_arn = aws_alb_target_group.this.arn
   }
 }
 
 resource "aws_alb_target_group" "this" {
-  name        = "${var.name}"
+  name        = var.name
   port        = "80"
   protocol    = "HTTP"
-  vpc_id      = "${var.vpc_id}"
-  target_type = "${var.target_type}"
+  vpc_id      = var.vpc_id
+  target_type = var.target_type
 
   health_check {
-    interval            = "${var.interval}"
-    path                = "${var.path}"
+    interval            = var.interval
+    path                = var.path
     port                = "80"
     protocol            = "HTTP"
-    timeout             = "${var.timeout}"
-    unhealthy_threshold = "${var.unhealthy_threshold}"
-    healthy_threshold   = "${var.healthy_threshold}"
-    matcher             = "${var.success_code}"
+    timeout             = var.timeout
+    unhealthy_threshold = var.unhealthy_threshold
+    healthy_threshold   = var.healthy_threshold
+    matcher             = var.success_code
   }
 
   stickiness {
     type    = "lb_cookie"
-    enabled = "${var.stickiness_enabled}"
+    enabled = var.stickiness_enabled
   }
 
   lifecycle {
@@ -74,12 +74,12 @@ resource "aws_alb_target_group" "this" {
   }
 
   depends_on = ["aws_alb.this"]
-  tags       = "${merge(var.common_tags, var.alb_tags, map("Name", format("%s", var.name)))}"
+  tags       = merge(var.common_tags, var.alb_tags, map("Name", format("%s", var.name)))
 }
 
 resource "aws_wafregional_web_acl_association" "this" {
-  count        = "${var.waf_enabled ? 1 : 0}"
+  count        = var.waf_enabled ? 1 : 0
   depends_on   = ["aws_alb.this"]
-  resource_arn = "${aws_alb.this.arn}"
-  web_acl_id   = "${var.waf_web_acl}"
+  resource_arn = aws_alb.this.arn
+  web_acl_id   = var.waf_web_acl
 }

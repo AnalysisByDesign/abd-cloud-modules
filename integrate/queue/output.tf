@@ -3,5 +3,5 @@
 # --------------------------------------------------------------------------------------------
 
 output "arn" {
-  value = "${join("", aws_sqs_queue.without_redrive.*.arn, aws_sqs_queue.with_redrive.*.arn)}"
+  value = join("", aws_sqs_queue.without_redrive.*.arn, aws_sqs_queue.with_redrive.*.arn)
 }

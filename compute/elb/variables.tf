@@ -5,22 +5,22 @@
 
 variable "name" {
   description = "The name of the load balancer"
-  type        = "string"
+  type        = string
 }
 
 variable "subnet_ids" {
   description = "The VPC subnet ids to deploy instances into"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "security_group_ids" {
   description = "A list of security group ids for the auto-scaling instance"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "common_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map(string)
 }
 
 # --------------------------------------------------------------------------------------------
@@ -30,55 +30,55 @@ variable "common_tags" {
 
 variable "lb_port" {
   description = "Inbound load balancer port number"
-  type        = "string"
+  type        = string
   default     = "80"
 }
 
 variable "lb_protocol" {
   description = "Inbound load balancer protocol"
-  type        = "string"
+  type        = string
   default     = "TCP"
 }
 
 variable "instance_port" {
   description = "Outbound load balancer port number to instance"
-  type        = "string"
+  type        = string
   default     = "80"
 }
 
 variable "instance_protocol" {
   description = "Outbound load balancer protocol to instance"
-  type        = "string"
+  type        = string
   default     = "TCP"
 }
 
 variable "healthcheck_healthy_threshold" {
   description = "Healthcheck healthy threshold"
-  type        = "string"
+  type        = string
   default     = "2"
 }
 
 variable "healthcheck_unhealthy_threshold" {
   description = "Healthcheck unhealthy threshold"
-  type        = "string"
+  type        = string
   default     = "2"
 }
 
 variable "healthcheck_timeout" {
   description = "Healthcheck timeout"
-  type        = "string"
+  type        = string
   default     = "3"
 }
 
 variable "healthcheck_interval" {
   description = "Healthcheck interval"
-  type        = "string"
+  type        = string
   default     = "30"
 }
 
 variable "healthcheck_target" {
   description = "Healthcheck target - defaults to instance_protocol:instance_port"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
@@ -89,7 +89,7 @@ variable "cross_zone_load_balancing" {
 
 variable "idle_timeout" {
   description = "Idle timeout"
-  type        = "string"
+  type        = string
   default     = "60"
 }
 
@@ -100,12 +100,12 @@ variable "connection_draining" {
 
 variable "connection_draining_timeout" {
   description = "Connection draining timeout"
-  type        = "string"
+  type        = string
   default     = "300"
 }
 
 variable "elb_tags" {
   description = "Additional tags for the LB"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }

@@ -7,30 +7,30 @@
 
 variable "name" {
   description = "The security group name"
-  type        = "string"
+  type        = string
 }
 
 variable "vpc_id" {
   description = "The VPC id to build the security group in"
-  type        = "string"
+  type        = string
 }
 
 variable "common_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map(string)
 }
 
 # Optional -----------------------------------------------------------------------------------
 
 variable "sg_tags" {
   description = "Additional tags for the security group"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
 variable "description" {
   description = "The description for the security group"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
@@ -41,6 +41,6 @@ variable "revoke_rules_on_delete" {
 
 variable "timeouts" {
   description = "Configurable timeouts for the resource"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }

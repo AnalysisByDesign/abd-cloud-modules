@@ -5,22 +5,22 @@
 
 variable "zone_id" {
   description = "The name of the Route53 zone to build the record in"
-  type        = "string"
+  type        = string
 }
 
 variable "name" {
   description = "The name of the Route53 record"
-  type        = "string"
+  type        = string
 }
 
 variable "alias_name" {
   description = "Alias target domain name"
-  type        = "string"
+  type        = string
 }
 
 variable "alias_zone_id" {
   description = "Alias target domain name zone id"
-  type        = "string"
+  type        = string
 }
 
 # --------------------------------------------------------------------------------------------

@@ -3,13 +3,13 @@
 # -----------------------------------------------------------------------------
 
 resource "aws_route53_record" "this" {
-  count = "${var.required}"
+  count = var.required
 
-  zone_id = "${var.zone_id}"
-  name    = "${var.name}"
-  type    = "${var.type}"
+  zone_id = var.zone_id
+  name    = var.name
+  type    = var.type
 
-  ttl     = "${var.ttl}"
+  ttl     = var.ttl
   records = ["${var.records}"]
 
   lifecycle {

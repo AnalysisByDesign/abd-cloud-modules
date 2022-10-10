@@ -7,7 +7,7 @@
 
 variable "key" {
   description = "Key to store the secret value under"
-  type        = "string"
+  type        = string
 }
 
 # Optional -----------------------------------------------------------------------------------
@@ -19,24 +19,24 @@ variable "required" {
 
 variable "description" {
   description = "A description for the value to be stored"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "type" {
   description = "What is the type of value to be stored"
-  type        = "string"
+  type        = string
   default     = "String"
 }
 
 variable "value" {
   description = "What is the value to be stored"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "tags" {
   description = "Tags for the secret parameter"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }

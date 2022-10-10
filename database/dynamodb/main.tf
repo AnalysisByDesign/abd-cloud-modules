@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 resource "aws_dynamodb_table" "this" {
-  name           = "${var.name}"
+  name           = var.name
   read_capacity  = 20
   write_capacity = 20
   hash_key       = "LockID"
@@ -13,7 +13,7 @@ resource "aws_dynamodb_table" "this" {
     type = "S"
   }
 
-  tags = "${merge(var.common_tags, 
-                    var.dynamodb_tags, 
-                    map("Name", format("%s", var.name)))}"
+  tags = (merge(var.common_tags,
+    var.dynamodb_tags,
+  map("Name", format("%s", var.name))))
 }

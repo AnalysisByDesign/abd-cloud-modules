@@ -10,14 +10,14 @@
 # -----------------------------------------------------------------------------
 
 resource "aws_acm_certificate" "this" {
-  count = "${var.required ? 1 : 0}"
+  count = var.required ? 1 : 0
 
   provider                  = "aws.acm_custom"
-  domain_name               = "${var.domain_name}"
+  domain_name               = var.domain_name
   subject_alternative_names = ["${var.subject_alternative_names}"]
   validation_method         = "DNS"
 
-  tags = "${merge(var.common_tags, var.acm_tags, map("Name", format("%s", var.domain_name)))}"
+  tags = merge(var.common_tags, var.acm_tags, map("Name", format("%s", var.domain_name)))
 
   lifecycle {
     create_before_destroy = true
@@ -29,19 +29,19 @@ locals {
 }
 
 resource "aws_route53_record" "cert_validation" {
-  count = "${var.required ? length(local.acm_cert) : 0}"
+  count = var.required ? length(local.acm_cert) : 0
 
-  name    = "${lookup(local.acm_cert[count.index], "resource_record_name")}"
-  type    = "${lookup(local.acm_cert[count.index], "resource_record_type")}"
-  zone_id = "${var.r53_zone_id}"
+  name    = lookup(local.acm_cert[count.index], "resource_record_name")
+  type    = lookup(local.acm_cert[count.index], "resource_record_type")
+  zone_id = var.r53_zone_id
   records = ["${lookup(local.acm_cert[count.index], "resource_record_value")}"]
   ttl     = 60
 }
 
 resource "aws_acm_certificate_validation" "this" {
-  count = "${var.required ? 1 : 0}"
+  count = var.required ? 1 : 0
 
   provider                = "aws.acm_custom"
-  certificate_arn         = "${aws_acm_certificate.this.0.arn}"
+  certificate_arn         = aws_acm_certificate.this.0.arn
   validation_record_fqdns = ["${aws_route53_record.cert_validation.*.fqdn}"]
 }

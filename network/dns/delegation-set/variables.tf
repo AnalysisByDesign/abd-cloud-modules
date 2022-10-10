@@ -17,6 +17,6 @@ variable "use_existing_zones" {
 
 variable "delegate_set_name" {
   description = "A reference name for the delegation set"
-  type        = "string"
+  type        = string
   default     = ""
 }

@@ -7,10 +7,10 @@
 
 variable "name" {
   description = "Name of SSH key to upload"
-  type        = "string"
+  type        = string
 }
 
 variable "public_key_file" {
   description = "Physical file location of public key part to upload"
-  type        = "string"
+  type        = string
 }

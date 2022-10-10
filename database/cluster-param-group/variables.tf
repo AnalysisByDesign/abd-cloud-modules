@@ -7,12 +7,12 @@
 
 variable "name" {
   description = "Name of DB cluster parameter groups"
-  type        = "string"
+  type        = string
 }
 
 variable "common_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map(string)
 }
 
 # Optional -----------------------------------------------------------------------------------
@@ -23,31 +23,31 @@ variable "count" {
 
 variable "description" {
   description = "The RDS parameter groups description"
-  type        = "string"
+  type        = string
   default     = "Terraform managed"
 }
 
 variable "db_family" {
   description = "The Aurora family for the param group"
-  type        = "string"
+  type        = string
   default     = "aurora-mysql5.7"
 }
 
 variable "character_set" {
   description = "Default character set configuration"
-  type        = "string"
+  type        = string
   default     = "utf8"
 }
 
 variable "collation" {
   description = "Default collation configuration"
-  type        = "string"
+  type        = string
   default     = "utf8_general_ci"
 }
 
 variable "param_group_tags" {
   description = "A map of tags to add to cluster parameter group"
-  type        = "map"
+  type        = map(string)
 
   default = {
     "Component" = "rds aurora"

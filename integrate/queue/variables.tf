@@ -5,12 +5,12 @@
 # Required -----------------------------------------------------------------------------------
 variable "name" {
   description = "Name"
-  type        = "string"
+  type        = string
 }
 
 variable "common_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map(string)
 }
 
 # Optional -----------------------------------------------------------------------------------
@@ -52,6 +52,6 @@ variable "deadletter_enable" {
 
 variable "deadletter_arn" {
   description = "Dead-letter queue arn"
-  type        = "string"
+  type        = string
   default     = ""
 }

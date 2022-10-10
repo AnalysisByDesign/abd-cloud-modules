@@ -6,27 +6,27 @@
 
 variable "name" {
   description = "The name prefix of the EC2 instances"
-  type        = "string"
+  type        = string
 }
 
 variable "image_id" {
   description = "The EC2 AMI image id"
-  type        = "string"
+  type        = string
 }
 
 variable "security_group_ids" {
   description = "A list of security group ids for the auto-scaling instance"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "subnet_ids" {
   description = "The VPC subnet ids to deploy instances into"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "common_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map(string)
 }
 
 # Optional -----------------------------------------------------------------------------------
@@ -37,19 +37,19 @@ variable "count" {
 
 variable "instance_type" {
   description = "The EC2 instance type to build"
-  type        = "string"
+  type        = string
   default     = "t3.micro"
 }
 
 variable "ssh_key_name" {
   description = "SSH key name to apply"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "iam_profile_id" {
   description = "IAM instance profile to use for EC2 instances"
-  type        = "string"
+  type        = string
   default     = ""
 }
 

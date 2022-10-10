@@ -2,7 +2,7 @@
 
 variable "repository_name" {
   description = "Name of docker repository"
-  type        = "string"
+  type        = string
 }
 
 # Optional -----------------------------------------------------------------------------------
@@ -14,12 +14,12 @@ variable "required" {
 
 variable "repository_policy_document" {
   description = "Policies for ECR repository"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "repository_lifecycle_document" {
   description = "Lifecycle policies for ECR"
-  type        = "string"
+  type        = string
   default     = ""
 }

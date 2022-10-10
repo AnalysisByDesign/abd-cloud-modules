@@ -5,24 +5,24 @@
 
 variable "search_domain" {
   description = "The search domain to create a public zone for"
-  type        = "string"
+  type        = string
   default     = ""
 }
 
 variable "search_domains" {
   description = "A list of search domains to create a public zones for"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "common_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map(string)
 }
 
 variable "delegation_set_id" {
   description = "The delegation set id to build the public zone for"
-  type        = "string"
+  type        = string
 }
 
 # --------------------------------------------------------------------------------------------
@@ -37,6 +37,6 @@ variable "use_existing_zones" {
 
 variable "r53_tags" {
   description = "Additional tags for the Route53 zone"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
