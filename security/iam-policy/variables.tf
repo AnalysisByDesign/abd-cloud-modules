@@ -12,7 +12,7 @@ variable "name" {
 
 # Optional -----------------------------------------------------------------------------------
 
-variable "count" {
+variable "create_me" {
   description = "Should we create the policy"
   default     = 1
 }
