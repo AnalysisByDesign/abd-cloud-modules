@@ -8,5 +8,5 @@ resource "aws_efs_file_system" "this" {
   encrypted        = var.encrypted
   kms_key_id       = var.kms_key_id
 
-  tags = merge(var.common_tags, var.efs_tags, map("Name", format("%s", var.name)))
+  tags = merge(var.common_tags, var.efs_tags, { Name = var.name })
 }

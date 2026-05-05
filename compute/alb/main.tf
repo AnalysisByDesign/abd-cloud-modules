@@ -5,8 +5,8 @@ resource "aws_alb" "this" {
   name               = var.name
   internal           = var.internal
   load_balancer_type = "application"
-  security_groups    = ["${var.security_group_ids}"]
-  subnets            = ["${var.subnet_ids}"]
+  security_groups    = var.security_group_ids
+  subnets            = var.subnet_ids
 
   #  access_logs {
   #    bucket  = "${aws_s3_bucket.lb_logs.bucket}"
@@ -14,7 +14,7 @@ resource "aws_alb" "this" {
   #    enabled = true
   #  }
 
-  tags = merge(var.common_tags, var.alb_tags, map("Name", format("%s", var.name)))
+  tags = merge(var.common_tags, var.alb_tags, { Name = var.name })
 }
 
 resource "aws_lb_listener" "redirect" {
@@ -37,7 +37,7 @@ resource "aws_alb_listener" "actual" {
   load_balancer_arn = aws_alb.this.arn
   port              = "443"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2015-05"
+  ssl_policy        = var.ssl_policy
   certificate_arn   = var.acm_arn
 
   default_action {
@@ -73,13 +73,13 @@ resource "aws_alb_target_group" "this" {
     create_before_destroy = true
   }
 
-  depends_on = ["aws_alb.this"]
-  tags       = merge(var.common_tags, var.alb_tags, map("Name", format("%s", var.name)))
+  depends_on = [aws_alb.this]
+  tags       = merge(var.common_tags, var.alb_tags, { Name = var.name })
 }
 
-resource "aws_wafregional_web_acl_association" "this" {
+resource "aws_wafv2_web_acl_association" "this" {
   count        = var.waf_enabled ? 1 : 0
-  depends_on   = ["aws_alb.this"]
+  depends_on   = [aws_alb.this]
   resource_arn = aws_alb.this.arn
-  web_acl_id   = var.waf_web_acl
+  web_acl_arn  = var.waf_web_acl_arn
 }

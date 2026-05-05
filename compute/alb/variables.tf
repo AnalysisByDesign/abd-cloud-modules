@@ -99,13 +99,20 @@ variable "target_type" {
 # ============================================================================================
 #                                      WAF
 # ============================================================================================
+variable "ssl_policy" {
+  description = "ELB SSL/TLS security policy name"
+  type        = string
+  default     = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+}
+
 variable "waf_enabled" {
-  description = "Is WAF enabled"
+  description = "Enable WAFv2 web ACL association with the ALB"
+  type        = bool
   default     = false
 }
 
-variable "waf_web_acl" {
-  description = "AWS WAF WEB ACL id"
+variable "waf_web_acl_arn" {
+  description = "ARN of the WAFv2 web ACL to associate with the ALB"
   type        = string
   default     = ""
 }

@@ -5,8 +5,8 @@
 resource "aws_elb" "elb" {
   name = var.name
 
-  subnets         = ["${var.subnet_ids}"]
-  security_groups = ["${var.security_group_ids}"]
+  subnets         = var.subnet_ids
+  security_groups = var.security_group_ids
 
   listener {
     lb_port           = var.lb_port
@@ -31,5 +31,5 @@ resource "aws_elb" "elb" {
   connection_draining         = var.connection_draining
   connection_draining_timeout = var.connection_draining_timeout
 
-  tags = merge(var.common_tags, var.elb_tags, map("Name", format("%s", var.name)))
+  tags = merge(var.common_tags, var.elb_tags, { Name = var.name })
 }
