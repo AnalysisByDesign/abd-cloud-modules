@@ -1,10 +1,10 @@
 # --------------------------------------------------------------------------------------------
 # REQUIRED PARAMETERS
-# You must provide a value for each of these parameters.
 # --------------------------------------------------------------------------------------------
 
 variable "name" {
   description = "The name of the S3 bucket"
+  type        = string
 }
 
 variable "common_tags" {
@@ -14,68 +14,74 @@ variable "common_tags" {
 
 # --------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
-# These parameters have reasonable defaults.
 # --------------------------------------------------------------------------------------------
 
-variable "count" {
-  description = "Do we need to create the bucket"
-  type        = string
-  default     = "1"
+variable "create_bucket" {
+  description = "Set to false to skip creating the bucket (replaces the old 'count' variable)"
+  type        = bool
+  default     = true
 }
 
 variable "region" {
-  description = "A different region to build the bucket in"
+  description = "Deprecated: bucket region is now controlled by the provider configuration"
   type        = string
   default     = ""
 }
 
 variable "acl" {
-  description = "The canned ACL to apply"
+  description = "Canned ACL to apply. If empty or 'private', BucketOwnerEnforced ownership is used (no ACL). Any other value enables ObjectWriter ownership."
   type        = string
   default     = "private"
 }
 
 variable "bucket_policy" {
-  description = "S3 bucket policy"
+  description = "S3 bucket policy JSON document"
   type        = string
   default     = ""
 }
 
 variable "logging" {
-  description = "Logging definition for the bucket"
-  type        = list(string)
-  default     = []
+  description = "Access logging configuration. Set to null to disable logging."
+  type = object({
+    target_bucket = string
+    target_prefix = string
+  })
+  default = null
 }
 
 variable "lifecycle_rule" {
-  description = "Lifecycle rules for the bucket"
-  type        = list(string)
+  description = "List of lifecycle rule objects. Each object requires: id, enabled. Optional: expiration, noncurrent_version_expiration, transition."
+  type        = list(any)
   default     = []
 }
 
 variable "force_destroy" {
-  description = "Forcibly destroy all objects if removing the bucket - be careful!"
+  description = "Forcibly destroy all objects when removing the bucket"
+  type        = bool
   default     = false
 }
 
 variable "acceleration_status" {
-  description = "Acceleration status of the bucket"
-  default     = "Suspended"
+  description = "Transfer acceleration status. Set to 'Enabled' to enable, or leave empty to leave unconfigured."
+  type        = string
+  default     = ""
 }
 
 variable "replication_configuration" {
-  description = "Replication configuration details"
-  type        = list(string)
-  default     = []
+  description = "Replication configuration object with 'role' and 'rules' keys. Set to null to disable."
+  type        = any
+  default     = null
 }
 
 variable "enable_versioning" {
-  description = "Enable object versioning"
+  description = "Enable S3 object versioning"
+  type        = bool
   default     = false
 }
 
 variable "enable_mfa_delete" {
-  description = "Require an MFA device to delete objects"
+  description = "Require an MFA device to delete versioned objects"
+  type        = bool
   default     = false
 }
 

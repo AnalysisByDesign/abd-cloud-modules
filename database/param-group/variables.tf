@@ -16,10 +16,6 @@ variable "common_tags" {
 }
 
 # Optional -----------------------------------------------------------------------------------
-variable "count" {
-  description = "Count of number of resources required"
-  default     = 1
-}
 
 variable "description" {
   description = "The RDS parameter groups description"
@@ -30,7 +26,7 @@ variable "description" {
 variable "db_family" {
   description = "The Aurora family for the param group"
   type        = string
-  default     = "aurora-mysql5.7"
+  default     = "aurora-mysql8.0"
 }
 
 variable "log_bin_trust_function_creators" {

@@ -10,7 +10,7 @@ resource "aws_route53_record" "this" {
   type    = var.type
 
   ttl     = var.ttl
-  records = ["${var.records}"]
+  records = var.records
 
   lifecycle {
     create_before_destroy = true
