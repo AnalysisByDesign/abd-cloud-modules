@@ -3,8 +3,6 @@
 # -----------------------------------------------------------------------------
 
 resource "aws_db_parameter_group" "this" {
-  count = var.count
-
   name        = var.name
   family      = var.db_family
   description = "Terraform - ${var.description}"
@@ -80,7 +78,5 @@ resource "aws_db_parameter_group" "this" {
     value = var.sql_mode
   }
 
-  tags = (merge(var.common_tags,
-    var.param_group_tags,
-  map("Name", var.name)))
+  tags = merge(var.common_tags, var.param_group_tags, { Name = var.name })
 }

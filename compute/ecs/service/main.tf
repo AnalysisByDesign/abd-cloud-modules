@@ -17,8 +17,8 @@ resource "aws_ecs_service" "this" {
   launch_type                        = var.launch_type
 
   network_configuration {
-    security_groups  = ["${var.security_group_id}"]
-    subnets          = ["${var.subnet_ids}"]
+    security_groups  = [var.security_group_id]
+    subnets          = var.subnet_ids
     assign_public_ip = false
   }
 

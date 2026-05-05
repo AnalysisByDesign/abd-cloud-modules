@@ -7,5 +7,5 @@ resource "aws_route53_record" "this" {
   name    = format("efs-%s", var.route53_name != "" ? var.route53_name : var.name)
   type    = "CNAME"
   ttl     = "60"
-  records = ["${aws_efs_mount_target.this.0.dns_name}"]
+  records = [aws_efs_mount_target.this[0].dns_name]
 }

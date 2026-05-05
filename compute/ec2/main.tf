@@ -14,7 +14,7 @@ resource "aws_instance" "ec2" {
   ebs_optimized           = var.ebs_optimized
   disable_api_termination = var.disable_api_termination
 
-  vpc_security_group_ids = ["${var.security_group_ids}"]
+  vpc_security_group_ids = var.security_group_ids
 
-  tags = merge(var.common_tags, map("Name", format("%s", var.name)))
+  tags = merge(var.common_tags, { Name = var.name })
 }

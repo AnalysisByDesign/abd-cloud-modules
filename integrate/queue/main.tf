@@ -14,7 +14,7 @@ resource "aws_sqs_queue" "without_redrive" {
   delay_seconds             = var.delay_seconds
   receive_wait_time_seconds = var.receive_wait_time_seconds
 
-  tags = merge(var.common_tags, map("Name", format("%s", var.name)))
+  tags = merge(var.common_tags, { Name = var.name })
 }
 
 resource "aws_sqs_queue" "with_redrive" {
@@ -30,5 +30,5 @@ resource "aws_sqs_queue" "with_redrive" {
   receive_wait_time_seconds = var.receive_wait_time_seconds
 
   redrive_policy = "{\"deadLetterTargetArn\":\"${var.deadletter_arn}\",\"maxReceiveCount\":4}"
-  tags           = merge(var.common_tags, map("Name", format("%s", var.name)))
+  tags           = merge(var.common_tags, { Name = var.name })
 }
