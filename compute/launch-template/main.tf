@@ -10,7 +10,7 @@ resource "aws_launch_template" "this" {
   ebs_optimized                        = true
   instance_initiated_shutdown_behavior = "stop"
   key_name                             = var.ssh_key_name
-  vpc_security_group_ids               = ["${var.security_group_ids}"]
+  vpc_security_group_ids               = var.security_group_ids
 
   iam_instance_profile {
     name = var.iam_profile_id

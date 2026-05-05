@@ -10,10 +10,6 @@ variable "name" {
 }
 
 # Optional -----------------------------------------------------------------------------------
-variable "count" {
-  description = "Count of number of resources required"
-  default     = 1
-}
 
 variable "description" {
   description = "The IAM policy description"
@@ -22,7 +18,9 @@ variable "description" {
 }
 
 variable "elasticache_family" {
-  default = "redis4.0"
+  description = "The ElastiCache parameter group family"
+  type        = string
+  default     = "redis7.x"
 }
 
 variable "activerehashing" {

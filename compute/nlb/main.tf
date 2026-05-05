@@ -6,11 +6,11 @@ resource "aws_lb" "nlb" {
   load_balancer_type = "network"
   name               = var.name
   internal           = true
-  subnets            = ["${var.subnet_ids}"]
+  subnets            = var.subnet_ids
 
   enable_cross_zone_load_balancing = var.cross_zone_load_balancing
 
-  tags = merge(var.common_tags, var.lb_tags, map("Name", format("%s", var.name)))
+  tags = merge(var.common_tags, var.lb_tags, { Name = var.name })
 }
 
 resource "aws_lb_target_group" "nlb" {
@@ -32,7 +32,7 @@ resource "aws_lb_target_group" "nlb" {
     unhealthy_threshold = var.healthcheck_unhealthy_threshold
   }
 
-  tags = merge(var.common_tags, map("Name", format("%s", var.name)))
+  tags = merge(var.common_tags, { Name = var.name })
 }
 
 resource "aws_lb_listener" "front_end" {

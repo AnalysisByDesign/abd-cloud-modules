@@ -13,7 +13,5 @@ resource "aws_dynamodb_table" "this" {
     type = "S"
   }
 
-  tags = (merge(var.common_tags,
-    var.dynamodb_tags,
-  map("Name", format("%s", var.name))))
+  tags = merge(var.common_tags, var.dynamodb_tags, { Name = var.name })
 }
