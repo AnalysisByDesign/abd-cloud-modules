@@ -1,0 +1,77 @@
+name: Module Validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fmt-check:
+    name: Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "~1.9" }
+      - name: Terraform fmt
+        run: terraform fmt -check -recursive .
+
+  validate:
+    name: Validate ${{ matrix.module }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - cache/cluster-param-group
+          - compute/alb
+          - compute/asg
+          - compute/docker-repository
+          - compute/ec2
+          - compute/ecs/cluster
+          - compute/ecs/service
+          - compute/ecs/task
+          - compute/elb
+          - compute/launch-template
+          - compute/nlb
+          - database/cluster-param-group
+          - database/dynamodb
+          - database/param-group
+          - integrate/queue
+          - monitoring/cloudwatch/group
+          - network/cache-subnet-group
+          - network/db-subnet-group
+          - network/dns/alias-record
+          - network/dns/delegation-set
+          - network/dns/private-zone
+          - network/dns/public-zone
+          - network/dns/record
+          - network/dns/zone-association
+          - security/iam-policy
+          - security/iam-role
+          - security/secret-store
+          - security/security-group
+          - security/security-group-rule-cidr
+          - security/security-group-rule-link
+          - security/ssh-key
+          - security/ssl-certs
+          - storage/aws-s3
+          - storage/efs
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "~1.9" }
+
+      - name: Terraform Init (no backend)
+        working-directory: ${{ matrix.module }}
+        run: terraform init -backend=false
+
+      - name: Terraform Validate
+        working-directory: ${{ matrix.module }}
+        run: terraform validate
