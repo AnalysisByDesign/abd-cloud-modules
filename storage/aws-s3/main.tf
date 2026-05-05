@@ -90,14 +90,14 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket" {
       status = try(rule.value.enabled, true) ? "Enabled" : "Disabled"
 
       dynamic "expiration" {
-        for_each = try([rule.value.expiration], [])
+        for_each = try(rule.value.expiration, [])
         content {
           days = expiration.value.days
         }
       }
 
       dynamic "noncurrent_version_expiration" {
-        for_each = try([rule.value.noncurrent_version_expiration], [])
+        for_each = try(rule.value.noncurrent_version_expiration, [])
         content {
           noncurrent_days = noncurrent_version_expiration.value.days
         }
