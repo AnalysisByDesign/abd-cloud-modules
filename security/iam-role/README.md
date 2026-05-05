@@ -22,4 +22,39 @@ module "app_role" {
 ```
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [aws_iam_role.iam-role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.iam-role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_path"></a> [path](#input\_path) | Path location for role to be created | `string` | `"/"` | no |
+| <a name="input_required"></a> [required](#input\_required) | Do we need to build the roles | `number` | `1` | no |
+| <a name="input_roles"></a> [roles](#input\_roles) | A list of role details | `list(string)` | `[]` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_arns"></a> [arns](#output\_arns) | ARNs of the roles |
+| <a name="output_names"></a> [names](#output\_names) | Names of the roles |
 <!-- END_TF_DOCS -->

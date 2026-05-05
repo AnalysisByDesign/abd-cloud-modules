@@ -23,4 +23,45 @@ module "app_task" {
 ```
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [aws_ecs_task_definition.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_container_definitions"></a> [container\_definitions](#input\_container\_definitions) | A list of valid container definitions provided as a single valid JSON document. | `string` | n/a | yes |
+| <a name="input_cpu"></a> [cpu](#input\_cpu) | CPU units to allocate to the tasks | `string` | `"256"` | no |
+| <a name="input_family"></a> [family](#input\_family) | A unique name for your task definition. | `string` | n/a | yes |
+| <a name="input_memory"></a> [memory](#input\_memory) | RAM to allocate to the tasks | `string` | `"512"` | no |
+| <a name="input_network_mode"></a> [network\_mode](#input\_network\_mode) | The Docker networking mode - none, bridge, awsvpc or host. | `string` | `""` | no |
+| <a name="input_requires_compatibilities"></a> [requires\_compatibilities](#input\_requires\_compatibilities) | A set of launch types required by the task. The valid values are EC2 and FARGATE | `string` | `""` | no |
+| <a name="input_role_arn"></a> [role\_arn](#input\_role\_arn) | Role ECS ARN | `string` | `""` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_defininition_id"></a> [defininition\_id](#output\_defininition\_id) | n/a |
+| <a name="output_definition_arn"></a> [definition\_arn](#output\_definition\_arn) | n/a |
+| <a name="output_definition_revision"></a> [definition\_revision](#output\_definition\_revision) | n/a |
+| <a name="output_family"></a> [family](#output\_family) | n/a |
+| <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | n/a |
 <!-- END_TF_DOCS -->
