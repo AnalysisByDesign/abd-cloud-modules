@@ -5,7 +5,7 @@
 
 variable "roles" {
   description = "A list of role details"
-  type        = list(string)
+  type        = list(any)
   default     = []
 }
 
