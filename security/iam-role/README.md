@@ -51,7 +51,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_path"></a> [path](#input\_path) | Path location for role to be created | `string` | `"/"` | no |
-| <a name="input_required"></a> [required](#input\_required) | Do we need to build the roles | `number` | `1` | no |
+| <a name="input_required"></a> [required](#input\_required) | Do we need to build the roles | `bool` | `true` | no |
 | <a name="input_roles"></a> [roles](#input\_roles) | A list of role details | `list(any)` | `[]` | no |
 
 ## Outputs

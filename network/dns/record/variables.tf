@@ -31,8 +31,8 @@ variable "records" {
 
 variable "required" {
   description = "Do we need to create this - can be disabled from within another module"
-  type        = string
-  default     = 1
+  type        = bool
+  default     = true
 }
 
 variable "ttl" {

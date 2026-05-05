@@ -9,6 +9,7 @@ variable "repository_name" {
 
 variable "required" {
   description = "Do we need to build repository"
+  type        = bool
   default     = false
 }
 

@@ -11,7 +11,7 @@ resource "aws_ssm_parameter" "this" {
   tags        = var.tags
 
   # We don't want to reset the value if the user has changed it!
-  lifecycle = {
-    ignore_changes = ["value"]
+  lifecycle {
+    ignore_changes = [value]
   }
 }
