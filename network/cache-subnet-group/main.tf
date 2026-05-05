@@ -2,7 +2,7 @@
 # elasticache-subnet-group.tf
 # -----------------------------------------------------------------------------
 resource "aws_elasticache_subnet_group" "this" {
-  count = var.count
+  count = var.required ? 1 : 0
 
   name        = var.name
   subnet_ids  = var.subnet_ids

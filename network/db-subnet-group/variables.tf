@@ -22,9 +22,10 @@ variable "common_tags" {
 }
 
 # Optional -----------------------------------------------------------------------------------
-variable "count" {
-  description = "Count of number of resources required"
-  default     = 1
+variable "required" {
+  description = "Do we need to create this subnet group"
+  type        = bool
+  default     = true
 }
 
 variable "description" {
