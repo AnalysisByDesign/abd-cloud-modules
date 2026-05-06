@@ -5,7 +5,7 @@
 
 variable "roles" {
   description = "A list of role details"
-  type        = list(string)
+  type        = list(any)
   default     = []
 }
 
@@ -26,7 +26,8 @@ variable "roles" {
 
 variable "required" {
   description = "Do we need to build the roles"
-  default     = 1
+  type        = bool
+  default     = true
 }
 
 variable "path" {

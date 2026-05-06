@@ -19,13 +19,16 @@ module "dns_record" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
 
 ## Modules
 
@@ -43,7 +46,7 @@ No modules.
 | ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | The name of the Route53 record | `string` | n/a | yes |
 | <a name="input_records"></a> [records](#input\_records) | DNS records to add to route53 record | `list(string)` | n/a | yes |
-| <a name="input_required"></a> [required](#input\_required) | Do we need to create this - can be disabled from within another module | `string` | `1` | no |
+| <a name="input_required"></a> [required](#input\_required) | Do we need to create this - can be disabled from within another module | `bool` | `true` | no |
 | <a name="input_ttl"></a> [ttl](#input\_ttl) | The TTL for the Route53 record | `string` | `"60"` | no |
 | <a name="input_type"></a> [type](#input\_type) | The type of the Route53 record | `string` | `"A"` | no |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | The name of the Route53 zone to build the record in | `string` | n/a | yes |

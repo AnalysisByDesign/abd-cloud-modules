@@ -29,6 +29,7 @@ variable "cidr_blocks" {
 
 variable "required" {
   description = "Do we want to build this security group rule"
+  type        = bool
   default     = true
 }
 

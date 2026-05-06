@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 resource "aws_route53_record" "this" {
-  count = var.required
+  count = var.required ? 1 : 0
 
   zone_id = var.zone_id
   name    = var.name

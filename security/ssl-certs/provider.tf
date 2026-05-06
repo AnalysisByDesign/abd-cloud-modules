@@ -10,7 +10,7 @@
 # -----------------------------------------------------------------------------
 
 provider "aws" {
-  alias   = "acm_custom"
+  alias = "acm_custom"
 
   region = var.certificate_region
 

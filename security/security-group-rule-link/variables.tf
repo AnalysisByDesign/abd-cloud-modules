@@ -29,6 +29,7 @@ variable "source_security_group_id" {
 
 variable "required" {
   description = "Do we want to build this security group rule"
+  type        = bool
   default     = true
 }
 

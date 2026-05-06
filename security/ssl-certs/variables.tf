@@ -29,6 +29,7 @@ variable "common_tags" {
 
 variable "required" {
   description = "Do we need to create an SSL cert"
+  type        = bool
   default     = false
 }
 

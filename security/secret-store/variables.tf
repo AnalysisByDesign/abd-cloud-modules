@@ -14,6 +14,7 @@ variable "key" {
 
 variable "required" {
   description = "Do we need to store this secret"
+  type        = bool
   default     = true
 }
 
