@@ -23,8 +23,15 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type         = var.health_check_type
   force_delete              = var.force_delete
   termination_policies      = var.termination_policies
-  tags                      = var.tag_map
-  enabled_metrics           = var.enabled_metrics
+  dynamic "tag" {
+    for_each = var.tag_map
+    content {
+      key                 = tag.value["key"]
+      value               = tag.value["value"]
+      propagate_at_launch = tag.value["propagate_at_launch"]
+    }
+  }
+  enabled_metrics = var.enabled_metrics
   lifecycle {
     create_before_destroy = true
   }

@@ -20,7 +20,7 @@ variable "subnet_ids" {
 
 variable "tag_map" {
   description = "A list of tag maps to add to all resources"
-  type        = list(string)
+  type        = list(any)
 }
 
 # --------------------------------------------------------------------------------------------

@@ -28,13 +28,16 @@ module "app_asg" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
 
 ## Modules
 
@@ -63,7 +66,7 @@ No modules.
 | <a name="input_min_size"></a> [min\_size](#input\_min\_size) | Minimum size of the autoscaling group | `string` | `"1"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name prefix of the EC2 instances | `string` | n/a | yes |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The VPC subnet ids to deploy instances into | `list(string)` | n/a | yes |
-| <a name="input_tag_map"></a> [tag\_map](#input\_tag\_map) | A list of tag maps to add to all resources | `list(string)` | n/a | yes |
+| <a name="input_tag_map"></a> [tag\_map](#input\_tag\_map) | A list of tag maps to add to all resources | `list(any)` | n/a | yes |
 | <a name="input_target_group_arns"></a> [target\_group\_arns](#input\_target\_group\_arns) | Load balancer arns to attach instances to | `list(string)` | `[]` | no |
 | <a name="input_termination_policies"></a> [termination\_policies](#input\_termination\_policies) | Termination policies to apply to instances | `list(string)` | <pre>[<br/>  "default"<br/>]</pre> | no |
 
