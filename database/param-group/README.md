@@ -21,13 +21,16 @@ module "db_params" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
 
 ## Modules
 
@@ -44,8 +47,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of tags to add to all resources | `map(string)` | n/a | yes |
-| <a name="input_count"></a> [count](#input\_count) | Count of number of resources required | `number` | `1` | no |
-| <a name="input_db_family"></a> [db\_family](#input\_db\_family) | The Aurora family for the param group | `string` | `"aurora-mysql5.7"` | no |
+| <a name="input_db_family"></a> [db\_family](#input\_db\_family) | The Aurora family for the param group | `string` | `"aurora-mysql8.0"` | no |
 | <a name="input_description"></a> [description](#input\_description) | The RDS parameter groups description | `string` | `"Terraform managed"` | no |
 | <a name="input_group_concat_max_len"></a> [group\_concat\_max\_len](#input\_group\_concat\_max\_len) | Group concat max string length (default 4 Gb) | `number` | `4294967295` | no |
 | <a name="input_log_bin_trust_function_creators"></a> [log\_bin\_trust\_function\_creators](#input\_log\_bin\_trust\_function\_creators) | Allow creation of stored procedures | `number` | `1` | no |
