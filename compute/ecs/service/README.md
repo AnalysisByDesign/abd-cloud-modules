@@ -28,13 +28,16 @@ module "app_service" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.0 |
 
 ## Providers
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.46.0 |
 
 ## Modules
 
@@ -53,7 +56,6 @@ No modules.
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | ARN of an ECS cluster | `string` | n/a | yes |
 | <a name="input_container_name"></a> [container\_name](#input\_container\_name) | The name of the container to associate with the load balancer | `string` | n/a | yes |
 | <a name="input_container_port"></a> [container\_port](#input\_container\_port) | The port on the container to associate with the load balancer | `string` | n/a | yes |
-| <a name="input_depends_on"></a> [depends\_on](#input\_depends\_on) | n/a | `list(string)` | `[]` | no |
 | <a name="input_deployment_maximum_percent"></a> [deployment\_maximum\_percent](#input\_deployment\_maximum\_percent) | The lower percentage limit of the number of healthy tasks in a service during a deployment | `string` | `"200"` | no |
 | <a name="input_deployment_minimum_healthy_percent"></a> [deployment\_minimum\_healthy\_percent](#input\_deployment\_minimum\_healthy\_percent) | The lower percentage limit of the number of healthy tasks in a service during a deployment | `string` | `"50"` | no |
 | <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | The number of instances of the task definition to place and keep running | `string` | `"1"` | no |

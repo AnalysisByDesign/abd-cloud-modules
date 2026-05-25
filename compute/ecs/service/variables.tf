@@ -76,8 +76,3 @@ variable "deployment_maximum_percent" {
   type        = string
   default     = "200"
 }
-
-variable "depends_on" {
-  type    = list(string)
-  default = []
-}
