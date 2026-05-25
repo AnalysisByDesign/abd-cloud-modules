@@ -1,7 +1,7 @@
 # Provides a Target Group resource for use with App Load Balancer resources.
 # CORE: main.tf
 
-resource "aws_alb" "this" {
+resource "aws_lb" "this" {
   name               = var.name
   internal           = var.internal
   load_balancer_type = "application"
@@ -18,7 +18,7 @@ resource "aws_alb" "this" {
 }
 
 resource "aws_lb_listener" "redirect" {
-  load_balancer_arn = aws_alb.this.arn
+  load_balancer_arn = aws_lb.this.arn
   port              = "80"
   protocol          = "HTTP"
 
@@ -33,8 +33,8 @@ resource "aws_lb_listener" "redirect" {
   }
 }
 
-resource "aws_alb_listener" "actual" {
-  load_balancer_arn = aws_alb.this.arn
+resource "aws_lb_listener" "actual" {
+  load_balancer_arn = aws_lb.this.arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = var.ssl_policy
@@ -42,11 +42,11 @@ resource "aws_alb_listener" "actual" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.this.arn
+    target_group_arn = aws_lb_target_group.this.arn
   }
 }
 
-resource "aws_alb_target_group" "this" {
+resource "aws_lb_target_group" "this" {
   name        = var.name
   port        = "80"
   protocol    = "HTTP"
@@ -73,13 +73,13 @@ resource "aws_alb_target_group" "this" {
     create_before_destroy = true
   }
 
-  depends_on = [aws_alb.this]
+  depends_on = [aws_lb.this]
   tags       = merge(var.common_tags, var.alb_tags, { Name = var.name })
 }
 
 resource "aws_wafv2_web_acl_association" "this" {
   count        = var.waf_enabled ? 1 : 0
-  depends_on   = [aws_alb.this]
-  resource_arn = aws_alb.this.arn
+  depends_on   = [aws_lb.this]
+  resource_arn = aws_lb.this.arn
   web_acl_arn  = var.waf_web_acl_arn
 }
