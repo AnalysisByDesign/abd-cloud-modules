@@ -32,5 +32,6 @@ resource "aws_launch_template" "this" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes        = [block_device_mappings]
   }
 }
