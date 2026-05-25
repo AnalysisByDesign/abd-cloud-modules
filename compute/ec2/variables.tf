@@ -31,10 +31,6 @@ variable "common_tags" {
 
 # Optional -----------------------------------------------------------------------------------
 
-variable "count" {
-  default = 1
-}
-
 variable "instance_type" {
   description = "The EC2 instance type to build"
   type        = string
