@@ -28,8 +28,9 @@ resource "aws_db_parameter_group" "this" {
   }
 
   parameter {
-    name  = "max_allowed_packet"
-    value = var.max_allowed_packet
+    name         = "max_allowed_packet"
+    value        = var.max_allowed_packet
+    apply_method = "immediate"
   }
 
   parameter {
@@ -74,8 +75,9 @@ resource "aws_db_parameter_group" "this" {
   }
 
   parameter {
-    name  = "sql_mode"
-    value = var.sql_mode
+    name         = "sql_mode"
+    value        = var.sql_mode
+    apply_method = "immediate"
   }
 
   tags = merge(var.common_tags, var.param_group_tags, { Name = var.name })
