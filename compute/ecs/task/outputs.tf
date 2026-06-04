@@ -6,7 +6,7 @@
 #
 ################################################################
 
-output "defininition_id" {
+output "definition_id" {
   value = aws_ecs_task_definition.this.id
 }
 
