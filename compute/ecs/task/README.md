@@ -62,8 +62,8 @@ No modules.
 
 | Name | Description |
 | ---- | ----------- |
-| <a name="output_defininition_id"></a> [defininition\_id](#output\_defininition\_id) | n/a |
 | <a name="output_definition_arn"></a> [definition\_arn](#output\_definition\_arn) | n/a |
+| <a name="output_definition_id"></a> [definition\_id](#output\_definition\_id) | n/a |
 | <a name="output_definition_revision"></a> [definition\_revision](#output\_definition\_revision) | n/a |
 | <a name="output_family"></a> [family](#output\_family) | n/a |
 | <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | n/a |
