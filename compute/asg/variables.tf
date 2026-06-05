@@ -100,6 +100,24 @@ variable "delete_timeout" {
   default     = "15m"
 }
 
+variable "enable_instance_refresh" {
+  description = "Automatically trigger a rolling instance refresh when the launch template changes"
+  type        = bool
+  default     = true
+}
+
+variable "instance_refresh_min_healthy_percentage" {
+  description = "Minimum percentage of instances that must remain healthy during an instance refresh"
+  type        = number
+  default     = 100
+}
+
+variable "instance_refresh_instance_warmup" {
+  description = "Seconds to wait after a new instance comes in service before moving on during an instance refresh"
+  type        = number
+  default     = 60
+}
+
 variable "enabled_metrics" {
   description = "What metrics to monitor"
   type        = list(string)

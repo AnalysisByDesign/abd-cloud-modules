@@ -32,6 +32,17 @@ resource "aws_autoscaling_group" "asg" {
     }
   }
   enabled_metrics = var.enabled_metrics
+  dynamic "instance_refresh" {
+    for_each = var.enable_instance_refresh ? [1] : []
+    content {
+      strategy = "Rolling"
+      preferences {
+        min_healthy_percentage = var.instance_refresh_min_healthy_percentage
+        instance_warmup        = var.instance_refresh_instance_warmup
+      }
+      triggers = ["launch_template"]
+    }
+  }
   lifecycle {
     create_before_destroy = true
   }
