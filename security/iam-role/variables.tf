@@ -4,22 +4,26 @@
 # --------------------------------------------------------------------------------------------
 
 variable "roles" {
-  description = "A list of role details"
-  type        = list(any)
-  default     = []
+  description = "A map of IAM role configurations, keyed by role name"
+  type = map(object({
+    description          = string
+    assume_role_policy   = string
+    policy_arn           = string
+    max_session_duration = optional(number, 3600)
+  }))
+  default = {}
 }
 
 /*
   # For example...
-  roles = [
-    {
-      name               = "admins"
-      description        = "IAM Role to assume"
-      assume_role_policy = # JSON policy document
-      policy_arn         = "arn:aws:iam::aws:policy/AdministratorAccess"
-      policy_name        = ""
-    },
-  ]
+  roles = {
+    admins = {
+      description          = "IAM Role to assume"
+      assume_role_policy   = # JSON policy document
+      policy_arn           = "arn:aws:iam::aws:policy/AdministratorAccess"
+      max_session_duration = 3600
+    }
+  }
 */
 
 # Optional -----------------------------------------------------------------------------------
