@@ -8,9 +8,15 @@ variable "name" {
   type        = string
 }
 
-variable "image_id" {
-  description = "The EC2 AMI image id"
+variable "ami_name_filter" {
+  description = "Name glob to find the latest AMI (e.g. \"my-app-*\"). Must match exactly one owner — set ami_owners if the AMI is not owned by this account."
   type        = string
+}
+
+variable "ami_owners" {
+  description = "List of AMI owner account IDs to search. Defaults to the current account."
+  type        = list(string)
+  default     = ["self"]
 }
 
 variable "security_group_ids" {

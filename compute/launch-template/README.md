@@ -46,16 +46,18 @@ No modules.
 | Name | Type |
 | ---- | ---- |
 | [aws_launch_template.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_template) | resource |
+| [aws_ami.latest](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_ami_name_filter"></a> [ami\_name\_filter](#input\_ami\_name\_filter) | Name glob to find the latest AMI (e.g. "my-app-*"). Must match exactly one owner — set ami\_owners if the AMI is not owned by this account. | `string` | n/a | yes |
+| <a name="input_ami_owners"></a> [ami\_owners](#input\_ami\_owners) | List of AMI owner account IDs to search. Defaults to the current account. | `list(string)` | <pre>[<br/>  "self"<br/>]</pre> | no |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of tags to add to all resources | `map(string)` | n/a | yes |
 | <a name="input_disable_api_termination"></a> [disable\_api\_termination](#input\_disable\_api\_termination) | Disable API termination of instance | `bool` | `false` | no |
 | <a name="input_ec2_instance_type"></a> [ec2\_instance\_type](#input\_ec2\_instance\_type) | The EC2 instance type to build | `string` | `"t3.micro"` | no |
 | <a name="input_iam_profile_id"></a> [iam\_profile\_id](#input\_iam\_profile\_id) | IAM instance profile to use for EC2 instances | `string` | `""` | no |
-| <a name="input_image_id"></a> [image\_id](#input\_image\_id) | The EC2 AMI image id | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name prefix of the EC2 instances | `string` | n/a | yes |
 | <a name="input_require_public_ip"></a> [require\_public\_ip](#input\_require\_public\_ip) | Do the EC2 resources need a public IP | `bool` | `false` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | A list of security group ids for the auto-scaling instance | `list(string)` | n/a | yes |

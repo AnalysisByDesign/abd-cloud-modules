@@ -2,9 +2,24 @@
 # Launch template
 # -----------------------------------------------------------------------------
 
+data "aws_ami" "latest" {
+  most_recent = true
+  owners      = var.ami_owners
+
+  filter {
+    name   = "name"
+    values = [var.ami_name_filter]
+  }
+
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+}
+
 resource "aws_launch_template" "this" {
   name_prefix                          = "${var.name}-"
-  image_id                             = var.image_id
+  image_id                             = data.aws_ami.latest.id
   instance_type                        = var.ec2_instance_type
   disable_api_termination              = var.disable_api_termination
   ebs_optimized                        = true
