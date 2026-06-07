@@ -52,7 +52,7 @@ No modules.
 | ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_path"></a> [path](#input\_path) | Path location for role to be created | `string` | `"/"` | no |
 | <a name="input_required"></a> [required](#input\_required) | Do we need to build the roles | `bool` | `true` | no |
-| <a name="input_roles"></a> [roles](#input\_roles) | A list of role details | `list(any)` | `[]` | no |
+| <a name="input_roles"></a> [roles](#input\_roles) | A map of IAM role configurations, keyed by role name | <pre>map(object({<br/>    description          = string<br/>    assume_role_policy   = string<br/>    policy_arn           = string<br/>    max_session_duration = optional(number, 3600)<br/>  }))</pre> | `{}` | no |
 
 ## Outputs
 
