@@ -8,15 +8,9 @@ variable "name" {
   type        = string
 }
 
-variable "ami_name_filter" {
-  description = "Name glob to find the latest AMI (e.g. \"my-app-*\"). Must match exactly one owner — set ami_owners if the AMI is not owned by this account."
+variable "ami_id" {
+  description = "The AMI ID to use for the EC2 instances"
   type        = string
-}
-
-variable "ami_owners" {
-  description = "List of AMI owner account IDs to search. Defaults to the current account."
-  type        = list(string)
-  default     = ["self"]
 }
 
 variable "security_group_ids" {
