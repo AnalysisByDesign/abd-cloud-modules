@@ -40,7 +40,6 @@ resource "aws_autoscaling_group" "asg" {
         min_healthy_percentage = var.instance_refresh_min_healthy_percentage
         instance_warmup        = var.instance_refresh_instance_warmup
       }
-      triggers = ["launch_template"]
     }
   }
   lifecycle {
