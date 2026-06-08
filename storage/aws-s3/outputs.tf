@@ -26,3 +26,8 @@ output "hosted_zone_id" {
   description = "The Route53 hosted zone ID of the S3 bucket"
   value       = var.create_bucket ? aws_s3_bucket.bucket[0].hosted_zone_id : ""
 }
+
+output "kms_key_arn" {
+  description = "The ARN of the KMS key used to encrypt the S3 bucket"
+  value       = var.create_bucket ? aws_kms_key.bucket.arn : ""
+}

@@ -54,12 +54,16 @@ No modules.
 | <a name="input_efs_tags"></a> [efs\_tags](#input\_efs\_tags) | Additional tags for the EFS volume | `map(string)` | `{}` | no |
 | <a name="input_encrypted"></a> [encrypted](#input\_encrypted) | Create an encrypted data volume | `bool` | `true` | no |
 | <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | Create an encrypted data volume | `string` | n/a | yes |
+| <a name="input_lifecycle_policy_transition_to_archive"></a> [lifecycle\_policy\_transition\_to\_archive](#input\_lifecycle\_policy\_transition\_to\_archive) | How long until files transition to Archive storage (e.g. AFTER\_90\_DAYS) | `string` | `null` | no |
+| <a name="input_lifecycle_policy_transition_to_ia"></a> [lifecycle\_policy\_transition\_to\_ia](#input\_lifecycle\_policy\_transition\_to\_ia) | How long until files transition to Infrequent Access storage (e.g. AFTER\_30\_DAYS) | `string` | `null` | no |
+| <a name="input_lifecycle_policy_transition_to_primary_storage_class"></a> [lifecycle\_policy\_transition\_to\_primary\_storage\_class](#input\_lifecycle\_policy\_transition\_to\_primary\_storage\_class) | When to move files back to primary storage on access (AFTER\_1\_ACCESS) | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the EFS volume | `any` | n/a | yes |
 | <a name="input_performance_mode"></a> [performance\_mode](#input\_performance\_mode) | The performance mode of the EFS filesystem | `string` | `"generalPurpose"` | no |
 | <a name="input_route53_name"></a> [route53\_name](#input\_route53\_name) | Friendly name for route53 entry | `string` | `""` | no |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | The Route53 zone id to put the R53 records in | `string` | n/a | yes |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | A list of security group ids for the EFS volume | `list(string)` | n/a | yes |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet ids inside the VPC | `list(string)` | n/a | yes |
+| <a name="input_throughput_mode"></a> [throughput\_mode](#input\_throughput\_mode) | Throughput mode for the EFS filesystem (bursting, provisioned, elastic) | `string` | `"bursting"` | no |
 
 ## Outputs
 
