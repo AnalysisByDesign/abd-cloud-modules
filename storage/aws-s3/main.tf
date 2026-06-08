@@ -89,6 +89,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket" {
       id     = rule.value.id
       status = try(rule.value.enabled, true) ? "Enabled" : "Disabled"
 
+      dynamic "filter" {
+        for_each = try([rule.value.filter], [])
+        content {
+          prefix = try(filter.value.prefix, null)
+        }
+      }
+
       dynamic "expiration" {
         for_each = try(rule.value.expiration, [])
         content {
