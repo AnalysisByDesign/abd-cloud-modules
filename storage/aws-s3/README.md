@@ -98,4 +98,5 @@ No modules.
 | <a name="output_bucket_regional_domain_name"></a> [bucket\_regional\_domain\_name](#output\_bucket\_regional\_domain\_name) | The regional domain name of the S3 bucket |
 | <a name="output_hosted_zone_id"></a> [hosted\_zone\_id](#output\_hosted\_zone\_id) | The Route53 hosted zone ID of the S3 bucket |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the S3 bucket |
+| <a name="output_kms_key_arn"></a> [kms\_key\_arn](#output\_kms\_key\_arn) | The ARN of the KMS key used to encrypt the S3 bucket |
 <!-- END_TF_DOCS -->
