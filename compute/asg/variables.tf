@@ -13,6 +13,12 @@ variable "launch_template_id" {
   type        = string
 }
 
+variable "launch_template_version" {
+  description = "Launch template version to use"
+  type        = string
+  default     = "$Latest"
+}
+
 variable "subnet_ids" {
   description = "The VPC subnet ids to deploy instances into"
   type        = list(string)
@@ -103,7 +109,7 @@ variable "delete_timeout" {
 variable "enable_instance_refresh" {
   description = "Automatically trigger a rolling instance refresh when the launch template changes"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "instance_refresh_min_healthy_percentage" {
@@ -112,10 +118,22 @@ variable "instance_refresh_min_healthy_percentage" {
   default     = 100
 }
 
+variable "instance_refresh_max_healthy_percentage" {
+  description = "Maximum percentage of instances that must remain healthy during an instance refresh"
+  type        = number
+  default     = 110
+}
+
 variable "instance_refresh_instance_warmup" {
   description = "Seconds to wait after a new instance comes in service before moving on during an instance refresh"
   type        = number
-  default     = 60
+  default     = null
+}
+
+variable "instance_refresh_triggers" {
+  description = "List of property name changes to trigger a refresh"
+  type        = list(string)
+  default     = []
 }
 
 variable "enabled_metrics" {

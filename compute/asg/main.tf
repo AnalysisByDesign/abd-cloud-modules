@@ -11,7 +11,7 @@ resource "aws_autoscaling_group" "asg" {
 
   launch_template {
     id      = var.launch_template_id
-    version = "$Latest"
+    version = var.launch_template_version
   }
   min_size                  = var.min_size
   desired_capacity          = var.desired_capacity
@@ -40,7 +40,7 @@ resource "aws_autoscaling_group" "asg" {
         min_healthy_percentage = var.instance_refresh_min_healthy_percentage
         instance_warmup        = var.instance_refresh_instance_warmup
       }
-      triggers = ["launch_template"]
+      triggers = var.instance_refresh_triggers
     }
   }
   lifecycle {
