@@ -30,6 +30,7 @@ resource "aws_route53_record" "cert_validation" {
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
     }
+    if !startswith(dvo.domain_name, "*.")
   } : {}
 
   name    = each.value.name
