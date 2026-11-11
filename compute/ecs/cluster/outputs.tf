@@ -13,3 +13,8 @@ output "cluster_id" {
 output "cluster_arn" {
   value = aws_ecs_cluster.this.arn
 }
+
+output "capacity_provider_names" {
+  description = "Names of the capacity providers this module created"
+  value       = [for k, v in aws_ecs_capacity_provider.this : v.name]
+}

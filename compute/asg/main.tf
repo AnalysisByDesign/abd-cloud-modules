@@ -23,6 +23,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type         = var.health_check_type
   force_delete              = var.force_delete
   termination_policies      = var.termination_policies
+  protect_from_scale_in     = var.protect_from_scale_in
   dynamic "tag" {
     for_each = var.tag_map
     content {
@@ -40,6 +41,10 @@ resource "aws_autoscaling_group" "asg" {
         min_healthy_percentage = var.instance_refresh_min_healthy_percentage
         max_healthy_percentage = var.instance_refresh_max_healthy_percentage
         instance_warmup        = var.instance_refresh_instance_warmup
+
+        # null keeps the provider default (Ignore); ECS hosts with managed termination
+        # protection need Refresh, or a refresh skips every host
+        scale_in_protected_instances = var.instance_refresh_scale_in_protected_instances
       }
       triggers = var.instance_refresh_triggers
     }

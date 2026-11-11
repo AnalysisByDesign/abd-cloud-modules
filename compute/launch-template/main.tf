@@ -33,8 +33,23 @@ resource "aws_launch_template" "this" {
     capacity_reservation_preference = "none"
   }
 
-  credit_specification {
-    cpu_credits = "unlimited"
+  # Burstable types only; null leaves the block out (needed for non-burstable or mixed types)
+  dynamic "credit_specification" {
+    for_each = var.cpu_credits == null ? [] : [var.cpu_credits]
+    content {
+      cpu_credits = credit_specification.value
+    }
+  }
+
+  # Left out unless set, so existing templates keep the AMI's defaults. A hop limit of 1
+  # stops containers on a bridge network reaching the instance role's credentials
+  dynamic "metadata_options" {
+    for_each = var.metadata_http_tokens == null && var.metadata_http_put_response_hop_limit == null ? [] : [1]
+    content {
+      http_endpoint               = "enabled"
+      http_tokens                 = var.metadata_http_tokens
+      http_put_response_hop_limit = var.metadata_http_put_response_hop_limit
+    }
   }
 
   monitoring {

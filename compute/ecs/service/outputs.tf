@@ -6,6 +6,16 @@
 #
 ################################################################
 
+locals {
+  service = one(concat(aws_ecs_service.this, aws_ecs_service.ci_managed))
+}
+
 output "aws_ecs_service_id" {
-  value = aws_ecs_service.this.id
+  description = "The ARN of the service"
+  value       = local.service.id
+}
+
+output "name" {
+  description = "The name of the service"
+  value       = local.service.name
 }

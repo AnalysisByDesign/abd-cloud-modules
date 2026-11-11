@@ -9,7 +9,7 @@ variable "name" {
 }
 
 variable "ami_id" {
-  description = "The AMI ID to use for the EC2 instances"
+  description = "The AMI ID to use for the EC2 instances, or resolve:ssm:<parameter> to resolve an SSM parameter at each launch"
   type        = string
 }
 
@@ -61,4 +61,32 @@ variable "user_data_script" {
 variable "disable_api_termination" {
   description = "Disable API termination of instance"
   default     = false
+}
+
+variable "cpu_credits" {
+  description = "CPU credit option for burstable instance types (standard or unlimited). null leaves the credit specification out"
+  type        = string
+  default     = "unlimited"
+
+  validation {
+    condition     = var.cpu_credits == null || contains(["standard", "unlimited"], coalesce(var.cpu_credits, "standard"))
+    error_message = "cpu_credits must be standard, unlimited or null."
+  }
+}
+
+variable "metadata_http_tokens" {
+  description = "IMDS token setting (required or optional). null, with a null hop limit, leaves metadata options at the AMI's defaults"
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.metadata_http_tokens == null || contains(["required", "optional"], coalesce(var.metadata_http_tokens, "required"))
+    error_message = "metadata_http_tokens must be required, optional or null."
+  }
+}
+
+variable "metadata_http_put_response_hop_limit" {
+  description = "IMDS PUT response hop limit (1 to 64). 1 blocks containers on a bridge network from the instance metadata"
+  type        = number
+  default     = null
 }

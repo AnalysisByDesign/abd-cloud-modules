@@ -25,3 +25,8 @@ output "family" {
 output "definition_revision" {
   value = aws_ecs_task_definition.this.revision
 }
+
+output "arn_without_revision" {
+  description = "The task definition ARN without its revision, for IAM policies that cover every revision"
+  value       = aws_ecs_task_definition.this.arn_without_revision
+}
