@@ -37,7 +37,7 @@ module "app_asg" {
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.46.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.72.0 |
 
 ## Modules
 
@@ -62,8 +62,9 @@ No modules.
 | <a name="input_force_delete"></a> [force\_delete](#input\_force\_delete) | Force delete of autoscaling group if instances not terminating | `string` | `"false"` | no |
 | <a name="input_health_check_grace_period"></a> [health\_check\_grace\_period](#input\_health\_check\_grace\_period) | Maximum | `string` | `"240"` | no |
 | <a name="input_health_check_type"></a> [health\_check\_type](#input\_health\_check\_type) | Maximum | `string` | `"ELB"` | no |
+| <a name="input_initial_lifecycle_hooks"></a> [initial\_lifecycle\_hooks](#input\_initial\_lifecycle\_hooks) | Lifecycle hooks to create with the ASG, e.g. an autoscaling:EC2\_INSTANCE\_LAUNCHING hook that the instance completes itself once ready | <pre>list(object({<br/>    name                    = string<br/>    lifecycle_transition    = string<br/>    default_result          = optional(string, "ABANDON")<br/>    heartbeat_timeout       = optional(number, 300)<br/>    notification_metadata   = optional(string)<br/>    notification_target_arn = optional(string)<br/>    role_arn                = optional(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_instance_refresh_instance_warmup"></a> [instance\_refresh\_instance\_warmup](#input\_instance\_refresh\_instance\_warmup) | Seconds to wait after a new instance comes in service before moving on during an instance refresh | `number` | `null` | no |
-| <a name="input_instance_refresh_max_healthy_percentage"></a> [instance\_refresh\_max\_healthy\_percentage](#input\_instance\_refresh\_max\_healthy\_percentage) | Maximum percentage of instances that must remain healthy during an instance refresh | `number` | `110` | no |
+| <a name="input_instance_refresh_max_healthy_percentage"></a> [instance\_refresh\_max\_healthy\_percentage](#input\_instance\_refresh\_max\_healthy\_percentage) | Maximum percentage of the desired capacity in service during an instance refresh. Above 100 (with a min of 100) launches replacements before terminating the old instances | `number` | `110` | no |
 | <a name="input_instance_refresh_min_healthy_percentage"></a> [instance\_refresh\_min\_healthy\_percentage](#input\_instance\_refresh\_min\_healthy\_percentage) | Minimum percentage of instances that must remain healthy during an instance refresh | `number` | `100` | no |
 | <a name="input_instance_refresh_triggers"></a> [instance\_refresh\_triggers](#input\_instance\_refresh\_triggers) | List of property name changes to trigger a refresh | `list(string)` | `[]` | no |
 | <a name="input_launch_template_id"></a> [launch\_template\_id](#input\_launch\_template\_id) | Launch template\_id to use | `string` | n/a | yes |

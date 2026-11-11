@@ -47,7 +47,8 @@ variable "iam_profile_id" {
 }
 
 variable "require_public_ip" {
-  description = "Do the EC2 resources need a public IP"
+  description = "Do the EC2 resources need a public IP (auto-assigned on the primary network interface)"
+  type        = bool
   default     = false
 }
 

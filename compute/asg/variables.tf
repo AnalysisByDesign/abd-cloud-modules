@@ -119,9 +119,23 @@ variable "instance_refresh_min_healthy_percentage" {
 }
 
 variable "instance_refresh_max_healthy_percentage" {
-  description = "Maximum percentage of instances that must remain healthy during an instance refresh"
+  description = "Maximum percentage of the desired capacity in service during an instance refresh. Above 100 (with a min of 100) launches replacements before terminating the old instances"
   type        = number
   default     = 110
+}
+
+variable "initial_lifecycle_hooks" {
+  description = "Lifecycle hooks to create with the ASG, e.g. an autoscaling:EC2_INSTANCE_LAUNCHING hook that the instance completes itself once ready"
+  type = list(object({
+    name                    = string
+    lifecycle_transition    = string
+    default_result          = optional(string, "ABANDON")
+    heartbeat_timeout       = optional(number, 300)
+    notification_metadata   = optional(string)
+    notification_target_arn = optional(string)
+    role_arn                = optional(string)
+  }))
+  default = []
 }
 
 variable "instance_refresh_instance_warmup" {
