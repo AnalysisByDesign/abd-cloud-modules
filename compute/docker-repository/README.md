@@ -4,17 +4,20 @@ Creates an ECR (Elastic Container Registry) repository with an optional access p
 
 ## Overview
 
-The repository is created with image tag immutability configurable (default mutable). An optional access policy controls which principals can pull or push images — useful for cross-account CI/CD pipelines. The lifecycle policy is passed as a JSON string, allowing arbitrary rules such as expiring untagged images after a set number of days or keeping only the latest N tagged images.
+Creates one repository, gated on `required`. Tag mutability (with optional wildcard exclusion filters), basic scan on push, encryption and tags are configurable, and each defaults to the AWS defaults (mutable, no scan on push, `AES256`, no tags). The access policy and lifecycle policy are created only when their documents are supplied: same-account IAM access needs no repository policy.
 
 ## Usage
 
 ```hcl
 module "ecr" {
-  source = "git@github.com:AnalysisByDesign/abd-cloud-modules.git//compute/docker-repository?ref=v1.0.0"
+  source = "../../../../abd-cloud-modules/compute/docker-repository"
 
-  name             = "my-application"
-  lifecycle_policy = file("./files/ecr-lifecycle.json")
-  common_tags      = local.common_tags
+  required        = true
+  repository_name = "abd/base"
+  scan_on_push    = true
+  tags            = local.common_tags
+
+  repository_lifecycle_document = file("${path.module}/files/ecr-lifecycle.json")
 }
 ```
 
@@ -30,7 +33,7 @@ module "ecr" {
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.46.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.72.0 |
 
 ## Modules
 
@@ -48,10 +51,16 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_encryption_type"></a> [encryption\_type](#input\_encryption\_type) | Encryption at rest: AES256 (free) or KMS (set kms\_key\_arn, or leave empty for the AWS managed key) | `string` | `"AES256"` | no |
+| <a name="input_image_tag_mutability"></a> [image\_tag\_mutability](#input\_image\_tag\_mutability) | Tag mutability: MUTABLE, IMMUTABLE, MUTABLE\_WITH\_EXCLUSION or IMMUTABLE\_WITH\_EXCLUSION | `string` | `"MUTABLE"` | no |
+| <a name="input_image_tag_mutability_exclusion_filters"></a> [image\_tag\_mutability\_exclusion\_filters](#input\_image\_tag\_mutability\_exclusion\_filters) | Wildcard tag filters that take the opposite mutability (only with the *\_WITH\_EXCLUSION settings) | `list(string)` | `[]` | no |
+| <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | KMS key ARN when encryption\_type is KMS (empty for the AWS managed key) | `string` | `""` | no |
 | <a name="input_repository_lifecycle_document"></a> [repository\_lifecycle\_document](#input\_repository\_lifecycle\_document) | Lifecycle policies for ECR | `string` | `""` | no |
 | <a name="input_repository_name"></a> [repository\_name](#input\_repository\_name) | Name of docker repository | `string` | n/a | yes |
 | <a name="input_repository_policy_document"></a> [repository\_policy\_document](#input\_repository\_policy\_document) | Policies for ECR repository | `string` | `""` | no |
 | <a name="input_required"></a> [required](#input\_required) | Do we need to build repository | `bool` | `false` | no |
+| <a name="input_scan_on_push"></a> [scan\_on\_push](#input\_scan\_on\_push) | Run a basic vulnerability scan when an image is pushed | `bool` | `false` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to the repository | `map(string)` | `{}` | no |
 
 ## Outputs
 
