@@ -38,9 +38,22 @@ resource "aws_autoscaling_group" "asg" {
       strategy = "Rolling"
       preferences {
         min_healthy_percentage = var.instance_refresh_min_healthy_percentage
+        max_healthy_percentage = var.instance_refresh_max_healthy_percentage
         instance_warmup        = var.instance_refresh_instance_warmup
       }
       triggers = var.instance_refresh_triggers
+    }
+  }
+  dynamic "initial_lifecycle_hook" {
+    for_each = var.initial_lifecycle_hooks
+    content {
+      name                    = initial_lifecycle_hook.value["name"]
+      lifecycle_transition    = initial_lifecycle_hook.value["lifecycle_transition"]
+      default_result          = initial_lifecycle_hook.value["default_result"]
+      heartbeat_timeout       = initial_lifecycle_hook.value["heartbeat_timeout"]
+      notification_metadata   = initial_lifecycle_hook.value["notification_metadata"]
+      notification_target_arn = initial_lifecycle_hook.value["notification_target_arn"]
+      role_arn                = initial_lifecycle_hook.value["role_arn"]
     }
   }
   lifecycle {
