@@ -35,7 +35,7 @@ module "app_lt" {
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.72.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.73.0 |
 
 ## Modules
 
@@ -51,11 +51,14 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
-| <a name="input_ami_id"></a> [ami\_id](#input\_ami\_id) | The AMI ID to use for the EC2 instances | `string` | n/a | yes |
+| <a name="input_ami_id"></a> [ami\_id](#input\_ami\_id) | The AMI ID to use for the EC2 instances, or resolve:ssm:<parameter> to resolve an SSM parameter at each launch | `string` | n/a | yes |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of tags to add to all resources | `map(string)` | n/a | yes |
+| <a name="input_cpu_credits"></a> [cpu\_credits](#input\_cpu\_credits) | CPU credit option for burstable instance types (standard or unlimited). null leaves the credit specification out | `string` | `"unlimited"` | no |
 | <a name="input_disable_api_termination"></a> [disable\_api\_termination](#input\_disable\_api\_termination) | Disable API termination of instance | `bool` | `false` | no |
 | <a name="input_ec2_instance_type"></a> [ec2\_instance\_type](#input\_ec2\_instance\_type) | The EC2 instance type to build | `string` | `"t3.micro"` | no |
 | <a name="input_iam_profile_id"></a> [iam\_profile\_id](#input\_iam\_profile\_id) | IAM instance profile to use for EC2 instances | `string` | `""` | no |
+| <a name="input_metadata_http_put_response_hop_limit"></a> [metadata\_http\_put\_response\_hop\_limit](#input\_metadata\_http\_put\_response\_hop\_limit) | IMDS PUT response hop limit (1 to 64). 1 blocks containers on a bridge network from the instance metadata | `number` | `null` | no |
+| <a name="input_metadata_http_tokens"></a> [metadata\_http\_tokens](#input\_metadata\_http\_tokens) | IMDS token setting (required or optional). null, with a null hop limit, leaves metadata options at the AMI's defaults | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name prefix of the EC2 instances | `string` | n/a | yes |
 | <a name="input_require_public_ip"></a> [require\_public\_ip](#input\_require\_public\_ip) | Do the EC2 resources need a public IP (auto-assigned on the primary network interface) | `bool` | `false` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | A list of security group ids for the auto-scaling instance | `list(string)` | n/a | yes |

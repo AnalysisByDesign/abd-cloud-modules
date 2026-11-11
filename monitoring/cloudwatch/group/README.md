@@ -4,17 +4,18 @@ Creates one or more CloudWatch log groups for centralised application and infras
 
 ## Overview
 
-Log groups are created from the `log_group_names` list, allowing multiple groups to be provisioned in a single module call. Each group has a configurable retention period (default 90 days). Groups are typically shared between the application tier, web servers, and infrastructure components.
+Log groups are created from the `cloudwatch_loggroup_names` list, allowing multiple groups to be provisioned in a single module call. Each group keeps events for `retention_in_days` (default 7).
 
 ## Usage
 
 ```hcl
 module "log_groups" {
-  source = "git@github.com:AnalysisByDesign/abd-cloud-modules.git//monitoring/cloudwatch/group?ref=v1.0.0"
+  source = "../../../abd-cloud-modules/monitoring/cloudwatch/group"
 
-  log_group_names    = ["infra", "web", "app"]
-  retention_in_days  = 90
-  common_tags        = local.common_tags
+  cloudwatch_loggroup_names = ["infra", "web", "app"]
+  retention_in_days         = 14
+  common_tags               = local.common_tags
+  cloudwatch_tags           = {}
 }
 ```
 
@@ -30,7 +31,7 @@ module "log_groups" {
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.46.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.73.0 |
 
 ## Modules
 
@@ -49,6 +50,7 @@ No modules.
 | <a name="input_cloudwatch_loggroup_names"></a> [cloudwatch\_loggroup\_names](#input\_cloudwatch\_loggroup\_names) | Group name for cloudwatch | `list(string)` | n/a | yes |
 | <a name="input_cloudwatch_tags"></a> [cloudwatch\_tags](#input\_cloudwatch\_tags) | Additional tags for CloudWatch | `map(string)` | n/a | yes |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A map of tags to add to all resources | `map(string)` | n/a | yes |
+| <a name="input_retention_in_days"></a> [retention\_in\_days](#input\_retention\_in\_days) | Days to keep log events (0 keeps them forever) | `number` | `7` | no |
 
 ## Outputs
 

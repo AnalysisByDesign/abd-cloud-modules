@@ -41,7 +41,7 @@ variable "min_size" {
 }
 
 variable "desired_capacity" {
-  description = "Desired size of the autoscaling group"
+  description = "Desired size of the autoscaling group. Set null when something else owns it (e.g. ECS managed scaling), so Terraform leaves the live value alone"
   type        = string
   default     = "1"
 }
@@ -142,6 +142,23 @@ variable "instance_refresh_instance_warmup" {
   description = "Seconds to wait after a new instance comes in service before moving on during an instance refresh"
   type        = number
   default     = null
+}
+
+variable "instance_refresh_scale_in_protected_instances" {
+  description = "What an instance refresh does with instances protected from scale in: Refresh, Ignore or Wait. null keeps the provider default (Ignore). ECS hosts with managed termination protection need Refresh"
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.instance_refresh_scale_in_protected_instances == null || contains(["Refresh", "Ignore", "Wait"], coalesce(var.instance_refresh_scale_in_protected_instances, "Ignore"))
+    error_message = "instance_refresh_scale_in_protected_instances must be Refresh, Ignore or Wait."
+  }
+}
+
+variable "protect_from_scale_in" {
+  description = "Protect new instances from scale in. Required by ECS capacity providers with managed termination protection"
+  type        = bool
+  default     = false
 }
 
 variable "instance_refresh_triggers" {

@@ -37,7 +37,7 @@ module "app_asg" {
 
 | Name | Version |
 | ---- | ------- |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.72.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.73.0 |
 
 ## Modules
 
@@ -56,7 +56,7 @@ No modules.
 | <a name="input_capacity_timeout"></a> [capacity\_timeout](#input\_capacity\_timeout) | Maximum | `string` | `"600s"` | no |
 | <a name="input_default_cooldown"></a> [default\_cooldown](#input\_default\_cooldown) | Cooldown period before allowing another autoscaling action | `string` | `"120"` | no |
 | <a name="input_delete_timeout"></a> [delete\_timeout](#input\_delete\_timeout) | Delete timeout setting | `string` | `"15m"` | no |
-| <a name="input_desired_capacity"></a> [desired\_capacity](#input\_desired\_capacity) | Desired size of the autoscaling group | `string` | `"1"` | no |
+| <a name="input_desired_capacity"></a> [desired\_capacity](#input\_desired\_capacity) | Desired size of the autoscaling group. Set null when something else owns it (e.g. ECS managed scaling), so Terraform leaves the live value alone | `string` | `"1"` | no |
 | <a name="input_enable_instance_refresh"></a> [enable\_instance\_refresh](#input\_enable\_instance\_refresh) | Automatically trigger a rolling instance refresh when the launch template changes | `bool` | `false` | no |
 | <a name="input_enabled_metrics"></a> [enabled\_metrics](#input\_enabled\_metrics) | What metrics to monitor | `list(string)` | <pre>[<br/>  "GroupMinSize",<br/>  "GroupMaxSize",<br/>  "GroupDesiredCapacity",<br/>  "GroupInServiceInstances",<br/>  "GroupPendingInstances",<br/>  "GroupStandbyInstances",<br/>  "GroupTerminatingInstances",<br/>  "GroupTotalInstances"<br/>]</pre> | no |
 | <a name="input_force_delete"></a> [force\_delete](#input\_force\_delete) | Force delete of autoscaling group if instances not terminating | `string` | `"false"` | no |
@@ -66,12 +66,14 @@ No modules.
 | <a name="input_instance_refresh_instance_warmup"></a> [instance\_refresh\_instance\_warmup](#input\_instance\_refresh\_instance\_warmup) | Seconds to wait after a new instance comes in service before moving on during an instance refresh | `number` | `null` | no |
 | <a name="input_instance_refresh_max_healthy_percentage"></a> [instance\_refresh\_max\_healthy\_percentage](#input\_instance\_refresh\_max\_healthy\_percentage) | Maximum percentage of the desired capacity in service during an instance refresh. Above 100 (with a min of 100) launches replacements before terminating the old instances | `number` | `110` | no |
 | <a name="input_instance_refresh_min_healthy_percentage"></a> [instance\_refresh\_min\_healthy\_percentage](#input\_instance\_refresh\_min\_healthy\_percentage) | Minimum percentage of instances that must remain healthy during an instance refresh | `number` | `100` | no |
+| <a name="input_instance_refresh_scale_in_protected_instances"></a> [instance\_refresh\_scale\_in\_protected\_instances](#input\_instance\_refresh\_scale\_in\_protected\_instances) | What an instance refresh does with instances protected from scale in: Refresh, Ignore or Wait. null keeps the provider default (Ignore). ECS hosts with managed termination protection need Refresh | `string` | `null` | no |
 | <a name="input_instance_refresh_triggers"></a> [instance\_refresh\_triggers](#input\_instance\_refresh\_triggers) | List of property name changes to trigger a refresh | `list(string)` | `[]` | no |
 | <a name="input_launch_template_id"></a> [launch\_template\_id](#input\_launch\_template\_id) | Launch template\_id to use | `string` | n/a | yes |
 | <a name="input_launch_template_version"></a> [launch\_template\_version](#input\_launch\_template\_version) | Launch template version to use | `string` | `"$Latest"` | no |
 | <a name="input_max_size"></a> [max\_size](#input\_max\_size) | Maximum size of the autoscaling group | `string` | `"1"` | no |
 | <a name="input_min_size"></a> [min\_size](#input\_min\_size) | Minimum size of the autoscaling group | `string` | `"1"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name prefix of the EC2 instances | `string` | n/a | yes |
+| <a name="input_protect_from_scale_in"></a> [protect\_from\_scale\_in](#input\_protect\_from\_scale\_in) | Protect new instances from scale in. Required by ECS capacity providers with managed termination protection | `bool` | `false` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The VPC subnet ids to deploy instances into | `list(string)` | n/a | yes |
 | <a name="input_tag_map"></a> [tag\_map](#input\_tag\_map) | A list of tag maps to add to all resources | `list(any)` | n/a | yes |
 | <a name="input_target_group_arns"></a> [target\_group\_arns](#input\_target\_group\_arns) | Load balancer arns to attach instances to | `list(string)` | `[]` | no |
