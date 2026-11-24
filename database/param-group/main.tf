@@ -27,10 +27,13 @@ resource "aws_db_parameter_group" "this" {
     value = var.max_connections
   }
 
+  # pending-reboot, not immediate: RDS reports this dynamic parameter as pending-reboot and
+  # ignores a change of apply method alone, so immediate gave a perpetual diff. A new value
+  # set here takes effect at the next reboot of the instances using this group.
   parameter {
     name         = "max_allowed_packet"
     value        = var.max_allowed_packet
-    apply_method = "immediate"
+    apply_method = "pending-reboot"
   }
 
   parameter {
@@ -74,10 +77,13 @@ resource "aws_db_parameter_group" "this" {
     value = var.wait_timeout
   }
 
+  # pending-reboot, not immediate: RDS reports this dynamic parameter as pending-reboot and
+  # ignores a change of apply method alone, so immediate gave a perpetual diff. A new value
+  # set here takes effect at the next reboot of the instances using this group.
   parameter {
     name         = "sql_mode"
     value        = var.sql_mode
-    apply_method = "immediate"
+    apply_method = "pending-reboot"
   }
 
   tags = merge(var.common_tags, var.param_group_tags, { Name = var.name })
