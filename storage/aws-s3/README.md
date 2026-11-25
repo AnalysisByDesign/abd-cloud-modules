@@ -88,6 +88,7 @@ No modules.
 | <a name="input_region"></a> [region](#input\_region) | Deprecated: bucket region is now controlled by the provider configuration | `string` | `""` | no |
 | <a name="input_replication_configuration"></a> [replication\_configuration](#input\_replication\_configuration) | Replication configuration object with 'role' and 'rules' keys. Set to null to disable. | `any` | `null` | no |
 | <a name="input_s3_tags"></a> [s3\_tags](#input\_s3\_tags) | Additional tags for the S3 bucket | `map(string)` | `{}` | no |
+| <a name="input_sse_algorithm"></a> [sse\_algorithm](#input\_sse\_algorithm) | Default encryption: aws:kms (a customer managed key per bucket, the default) or AES256 (SSE-S3, no key and no KMS permissions needed by readers and writers) | `string` | `"aws:kms"` | no |
 
 ## Outputs
 

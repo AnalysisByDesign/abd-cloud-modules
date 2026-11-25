@@ -29,5 +29,5 @@ output "hosted_zone_id" {
 
 output "kms_key_arn" {
   description = "The ARN of the KMS key used to encrypt the S3 bucket"
-  value       = var.create_bucket ? aws_kms_key.bucket.arn : ""
+  value       = var.create_bucket ? try(aws_kms_key.bucket[0].arn, "") : ""
 }
