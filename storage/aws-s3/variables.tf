@@ -90,3 +90,14 @@ variable "s3_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "sse_algorithm" {
+  description = "Default encryption: aws:kms (a customer managed key per bucket, the default) or AES256 (SSE-S3, no key and no KMS permissions needed by readers and writers)"
+  type        = string
+  default     = "aws:kms"
+
+  validation {
+    condition     = contains(["aws:kms", "AES256"], var.sse_algorithm)
+    error_message = "sse_algorithm must be aws:kms or AES256."
+  }
+}

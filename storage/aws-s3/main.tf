@@ -65,8 +65,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket" {
 
   rule {
     apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.bucket.arn
-      sse_algorithm     = "aws:kms"
+      kms_master_key_id = var.sse_algorithm == "aws:kms" ? aws_kms_key.bucket[0].arn : null
+      sse_algorithm     = var.sse_algorithm
     }
   }
 }
@@ -146,8 +146,15 @@ resource "aws_s3_bucket_replication_configuration" "bucket" {
   }
 }
 
-# KMS key for bucket encryption
+# KMS key for bucket encryption (none with SSE-S3)
+moved {
+  from = aws_kms_key.bucket
+  to   = aws_kms_key.bucket[0]
+}
+
 resource "aws_kms_key" "bucket" {
+  count = var.sse_algorithm == "aws:kms" ? 1 : 0
+
   description             = format("%s - S3 Bucket encryption key", var.name)
   deletion_window_in_days = 10
 }
